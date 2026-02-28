@@ -996,8 +996,8 @@ select.form-control option{background:var(--mid);color:var(--text);}
     <div class="auth-bg-img"></div>
     <div class="auth-card">
       <div class="auth-logo-row"><img src="https://www.ir-impact.com/wp-content/uploads/2024/11/Logo_Citadel-1024x499.png" alt="Citadel"/><span>Quantum Ledger</span></div>
-      <h2 class="auth-h">Client Access</h2>
-      <p class="auth-sub">Sign in to your institutional portfolio</p>
+      <h2 class="auth-h" id="login-title">Client Access</h2>
+      <p class="auth-sub" id="login-sub">Sign in to your institutional portfolio</p>
       <div class="alert alert-error" id="login-err"><i class="fa-solid fa-circle-exclamation"></i><span id="login-err-msg"></span></div>
       <div class="alert alert-info" id="login-info"><i class="fa-solid fa-circle-info"></i><span id="login-info-msg">Please confirm your email before signing in.</span></div>
       <form id="login-form" novalidate>
@@ -1015,11 +1015,12 @@ select.form-control option{background:var(--mid);color:var(--text);}
           <label style="display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--muted);cursor:pointer;"><input type="checkbox" id="l-remember" style="accent-color:var(--blue-lt);width:13px;height:13px;"/>Remember me</label>
           <a href="#" style="font-size:.76rem;color:var(--cyan);" id="l-forgot">Forgot password?</a>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i>Secure Login</button>
+        <button type="submit" class="btn btn-primary btn-block" id="login-btn"><i class="fa-solid fa-right-to-bracket"></i><span id="login-btn-label">Secure Login</span></button>
       </form>
-      <div class="auth-divider"><span>new here?</span></div>
-      <div class="auth-foot">No account? <a href="#" id="l-to-register">Open one free <i class="fa-solid fa-arrow-right fa-xs"></i></a></div>
-      <div class="auth-foot mt-2"><a href="#" id="l-to-verify" style="color:var(--faint);">Need to verify your account?</a></div>
+      <div class="auth-divider" id="login-divider"><span id="login-divider-label">new here?</span></div>
+      <div class="auth-foot" id="login-register-foot">No account? <a href="#" id="l-to-register">Open one free <i class="fa-solid fa-arrow-right fa-xs"></i></a></div>
+      <div class="auth-foot mt-2" id="login-verify-foot"><a href="#" id="l-to-verify" style="color:var(--faint);">Need to verify your account?</a></div>
+      <div class="auth-foot mt-2"><a href="#/admin-auth-login" id="l-to-admin" style="color:var(--amber);">Administrator? Use Admin Login</a></div>
       <div class="auth-foot mt-2"><a href="#" id="l-to-home" style="color:var(--ghost);font-size:.76rem;"><i class="fa-solid fa-arrow-left fa-xs"></i> Back to Home</a></div>
     </div>
   </div>
@@ -1562,6 +1563,13 @@ let miningInterval = null;
 let miningEarnings = [0, 0, 0];
 let stakingInterval = null;
 let currentUserProfile = null;
+let authPageMode = 'client';
+let authClientEmailDraft = '';
+const ADMIN_PRIMARY_EMAIL = 'admin@citadelquantumledger.pages.dev';
+const ADMIN_PRIMARY_USER_ID = '774526a7-dc24-4067-a964-7429c3cb857a';
+const ADMIN_LOGIN_HASH = '#/admin-auth-login';
+window.CITADEL_ADMIN_EMAILS = Array.from(new Set([...(Array.isArray(window.CITADEL_ADMIN_EMAILS) ? window.CITADEL_ADMIN_EMAILS : []), ADMIN_PRIMARY_EMAIL]));
+window.CITADEL_ADMIN_USER_IDS = Array.from(new Set([...(Array.isArray(window.CITADEL_ADMIN_USER_IDS) ? window.CITADEL_ADMIN_USER_IDS : []), ADMIN_PRIMARY_USER_ID]));
 
 const $ = id => document.getElementById(id);
 const fmt = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2}).format(n);
@@ -1670,12 +1678,12 @@ async function saveProfileFromForm() {
   applyUserProfile(profile);
   const cloud = await Auth.updateBioProfile(profile);
   if (cloud.ok) {
-    currentSession = { ...cloud.user, name: profile.fullName, profile: { ...(cloud.user?.profile || {}), phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' } };
+    currentSession = { ...cloud.user, name: profile.fullName, profile: { ...(cloud.user?.profile || {}), full_name: profile.fullName, display_name: profile.fullName, headline: profile.headline, location: profile.location, bio: profile.bio, phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' } };
     Auth._cache(currentSession);
     toast('success','Profile Updated','Your bio data and profile details have been saved.');
   } else {
     currentSession.name = profile.fullName;
-    currentSession.profile = { ...(currentSession.profile || {}), phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' };
+    currentSession.profile = { ...(currentSession.profile || {}), full_name: profile.fullName, display_name: profile.fullName, headline: profile.headline, location: profile.location, bio: profile.bio, phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' };
     Auth._cache(currentSession);
     toast('warning','Saved In This Browser','Your bio data was saved locally, but cloud sync could not be completed right now.');
   }
@@ -1773,7 +1781,9 @@ const SEED_TXS = [
 
 /* ── AUTH ── */
 const ADMIN_ROLE_NAMES = new Set(['admin','administrator','superadmin','super_admin','owner']);
-const ADMIN_EMAIL_ALLOWLIST = Array.isArray(window.CITADEL_ADMIN_EMAILS) ? window.CITADEL_ADMIN_EMAILS.map(v=>String(v||'').trim().toLowerCase()) : [];
+const ADMIN_EMAIL_ALLOWLIST = Array.isArray(window.CITADEL_ADMIN_EMAILS) ? Array.from(new Set(window.CITADEL_ADMIN_EMAILS.map(v=>String(v||'').trim().toLowerCase()).filter(Boolean))) : [ADMIN_PRIMARY_EMAIL.toLowerCase()];
+function normalizeAdminUserId(v){ return String(v || '').trim().replace(/^user-id-/i,'').toLowerCase(); }
+const ADMIN_USER_ID_ALLOWLIST = new Set((Array.isArray(window.CITADEL_ADMIN_USER_IDS) ? window.CITADEL_ADMIN_USER_IDS : [ADMIN_PRIMARY_USER_ID]).map(normalizeAdminUserId).filter(Boolean));
 function safeStr(v){ return v == null ? '' : String(v); }
 function getProfileName(profile, fallback='Client') {
   const full = safeStr(profile?.full_name || profile?.display_name).trim();
@@ -1790,11 +1800,13 @@ function getProfileRole(profile, user) {
 }
 function deriveIsAdmin(user, profile) {
   const role = getProfileRole(profile, user).toLowerCase();
+  const userId = normalizeAdminUserId(user?.id);
   return ADMIN_ROLE_NAMES.has(role)
     || profile?.is_admin === true
     || user?.app_metadata?.is_admin === true
     || user?.user_metadata?.is_admin === true
-    || ADMIN_EMAIL_ALLOWLIST.includes(safeStr(user?.email).toLowerCase());
+    || ADMIN_EMAIL_ALLOWLIST.includes(safeStr(user?.email).toLowerCase())
+    || ADMIN_USER_ID_ALLOWLIST.has(userId);
 }
 async function fetchProfile(userId) {
   if (!userId) return null;
@@ -1808,13 +1820,54 @@ function buildSessionUser(user, profile) {
   const role = getProfileRole(mergedProfile, user);
   return { id:user?.id, name, email:user?.email, role, isAdmin:deriveIsAdmin(user, mergedProfile), profile:mergedProfile || null, dbProfile:profile || null, isLegacy:false };
 }
+
+function setLoginMode(mode='client') {
+  authPageMode = mode === 'admin' ? 'admin' : 'client';
+  const isAdminMode = authPageMode === 'admin';
+  const title = $('login-title');
+  const sub = $('login-sub');
+  const btnLabel = $('login-btn-label');
+  const divider = $('login-divider');
+  const dividerLabel = $('login-divider-label');
+  const registerFoot = $('login-register-foot');
+  const verifyFoot = $('login-verify-foot');
+  const emailInput = $('l-email');
+  const info = $('login-info');
+  const infoMsg = $('login-info-msg');
+  const loginBtn = $('login-btn');
+  if (title) title.textContent = isAdminMode ? 'Admin Access' : 'Client Access';
+  if (sub) sub.textContent = isAdminMode ? 'Authorized administrators only — sign in to manage client accounts, deposits, withdrawals, and platform ledger operations.' : 'Sign in to your institutional portfolio';
+  if (btnLabel) btnLabel.textContent = isAdminMode ? 'Admin Login' : 'Secure Login';
+  if (dividerLabel) dividerLabel.textContent = isAdminMode ? 'administrator access only' : 'new here?';
+  if (divider) divider.classList.toggle('hidden', isAdminMode);
+  if (registerFoot) registerFoot.classList.toggle('hidden', isAdminMode);
+  if (verifyFoot) verifyFoot.classList.toggle('hidden', isAdminMode);
+  if (info) info.classList.remove('show');
+  if (infoMsg) infoMsg.textContent = isAdminMode ? `Admin login is restricted to ${ADMIN_PRIMARY_EMAIL}.` : 'Please confirm your email before signing in.';
+  if (loginBtn) {
+    loginBtn.classList.toggle('btn-cyan', isAdminMode);
+    loginBtn.classList.toggle('btn-primary', !isAdminMode);
+  }
+  if (emailInput) {
+    if (isAdminMode) {
+      if (emailInput.value && emailInput.value !== ADMIN_PRIMARY_EMAIL) authClientEmailDraft = emailInput.value;
+      emailInput.value = ADMIN_PRIMARY_EMAIL;
+      emailInput.readOnly = true;
+      emailInput.setAttribute('aria-readonly', 'true');
+    } else {
+      emailInput.readOnly = false;
+      emailInput.removeAttribute('aria-readonly');
+      if (emailInput.value === ADMIN_PRIMARY_EMAIL) emailInput.value = authClientEmailDraft || '';
+    }
+  }
+}
 const Auth = {
   async register({ firstName, lastName, email, phone, country, type, password }) {
     const { data, error } = await _sb.auth.signUp({ email, password,
       options: { data:{ first_name:firstName, last_name:lastName, full_name:`${firstName} ${lastName}` }, emailRedirectTo: window.location.origin + window.location.pathname }
     });
     if (error) return { ok:false, msg:error.message };
-    if (data.user) { await _sb.from('profiles').upsert({ id:data.user.id, first_name:firstName, last_name:lastName, phone:phone||'', country, investor_type:type }); }
+    if (data.user) { await _sb.from('profiles').upsert({ id:data.user.id, email:data.user.email || email, first_name:firstName, last_name:lastName, full_name:`${firstName} ${lastName}`.trim(), display_name:`${firstName} ${lastName}`.trim(), phone:phone||'', country, investor_type:type, role:'user', is_admin:false }); }
     return { ok:true, needsConfirm:!data.session };
   },
   async _sessionFromSupabaseUser(sbUser) {
@@ -1869,9 +1922,16 @@ const Auth = {
     try {
       await _sb.from('profiles').upsert({
         id: sbUser.id,
+        email: sbUser.email || null,
+        full_name: safeStr(profileDraft?.fullName).trim() || null,
+        display_name: safeStr(profileDraft?.fullName).trim() || null,
+        headline: safeStr(profileDraft?.headline).trim() || null,
+        location: safeStr(profileDraft?.location).trim() || null,
+        bio: safeStr(profileDraft?.bio).trim() || null,
         phone: safeStr(profileDraft?.phone).trim() || null,
         country: safeStr(profileDraft?.country).trim() || null,
-        investor_type: safeStr(profileDraft?.investorType).trim() || null
+        investor_type: safeStr(profileDraft?.investorType).trim() || null,
+        avatar_icon: safeStr(profileDraft?.avatarIcon).trim() || null
       });
     } catch {}
     const user = await this._sessionFromSupabaseUser(data.user || sbUser);
@@ -2304,16 +2364,15 @@ function bindAdminDashboard() {
   });
 }
 
-function showPage(id) {
+function showPage(id, routeOverride=null) {
   const session = Auth._getCached();
-  if (id === 'page-admin' && !session?.isAdmin) id = session ? 'page-dashboard' : 'page-login';
-  const target = $(id);
-  if (!target) return;
-  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-  target.classList.add('active');
-  window.scrollTo({ top:0, behavior:'instant' });
-  closeMobileMenu();
-  updateNav();
+  if (id === 'page-admin' && !session?.isAdmin) {
+    if (session) id = 'page-dashboard';
+    else {
+      id = 'page-login';
+      routeOverride = ADMIN_LOGIN_HASH;
+    }
+  }
   const hmap = {
     'page-landing':'/',
     'page-login':'/login',
@@ -2332,7 +2391,16 @@ function showPage(id) {
     'page-risk':'/risk',
     'page-aml':'/aml'
   };
-  if (hmap[id] !== undefined) history.replaceState(null, '', '#' + hmap[id]);
+  const target = $(id);
+  if (!target) return;
+  const nextHash = routeOverride || (hmap[id] !== undefined ? '#' + hmap[id] : (location.hash || '#/'));
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  target.classList.add('active');
+  history.replaceState(null, '', nextHash);
+  if (id === 'page-login') setLoginMode(nextHash === ADMIN_LOGIN_HASH ? 'admin' : 'client');
+  window.scrollTo({ top:0, behavior:'instant' });
+  closeMobileMenu();
+  updateNav();
   if (id === 'page-performance') initPerfPage();
   if (id === 'page-markets') initMarketsPage();
   if (id === 'page-faq') initFAQPage();
@@ -2364,6 +2432,19 @@ function updateNav() {
 async function route() {
   const session = await Auth.refreshSession() || Auth._getCached();
   const hash = location.hash || '#/';
+  if (hash === ADMIN_LOGIN_HASH) {
+    if (session?.isAdmin) {
+      showPage('page-admin');
+      await initAdminDashboard(session);
+    } else if (session) {
+      showPage('page-dashboard');
+      await initDashboard(session);
+      toast('warning', 'Client Session Active', 'This route is reserved for the platform administrator.');
+    } else {
+      showPage('page-login', ADMIN_LOGIN_HASH);
+    }
+    return;
+  }
   const publicRouteMap = {
     '#':'page-landing',
     '#/':'page-landing',
@@ -2405,7 +2486,7 @@ async function route() {
       await initDashboard(session);
       toast('warning', 'Access Restricted', 'Only administrators can open the admin dashboard.');
     } else {
-      showPage('page-login');
+      showPage('page-login', ADMIN_LOGIN_HASH);
     }
     return;
   }
@@ -2577,16 +2658,43 @@ $('login-form').addEventListener('submit', async e=>{
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){$('l-email').classList.add('error');$('l-email-err').classList.add('show');ok=false;}else{$('l-email').classList.remove('error');$('l-email-err').classList.remove('show');}
   if(!pass){$('l-pass').classList.add('error');$('l-pass-err').classList.add('show');ok=false;}else{$('l-pass').classList.remove('error');$('l-pass-err').classList.remove('show');}
   if(!ok) return;
-  const btn=$('login-btn'); btn.innerHTML='<div class="spinner"></div> Authenticating…'; btn.disabled=true;
+  const btn=$('login-btn');
+  const defaultBtnHtml = authPageMode === 'admin'
+    ? '<i class="fa-solid fa-right-to-bracket"></i><span id="login-btn-label">Admin Login</span>'
+    : '<i class="fa-solid fa-right-to-bracket"></i><span id="login-btn-label">Secure Login</span>';
+  btn.innerHTML='<div class="spinner"></div> Authenticating…'; btn.disabled=true;
   const res=await Auth.login(email,pass);
-  btn.innerHTML='<i class="fa-solid fa-right-to-bracket"></i>Secure Login'; btn.disabled=false;
-  if(res.ok){toast('success','Access Granted',`Welcome back, ${res.user.name.split(' ')[0]}!`);showPage('page-dashboard');await initDashboard(res.user);}
+  btn.innerHTML=defaultBtnHtml; btn.disabled=false;
+  if(res.ok){
+    if (authPageMode === 'admin') {
+      if (res.user.isAdmin) {
+        toast('success','Admin Access Granted',`Welcome back, ${res.user.name.split(' ')[0]}!`);
+        showPage('page-admin');
+        await initAdminDashboard(res.user);
+      } else {
+        await Auth.logout();
+        $('login-err-msg').textContent='This login route is reserved for administrators only.';
+        $('login-err').classList.add('show');
+        toast('warning','Admin Login Only','Use the client login page for non-admin accounts.');
+      }
+    } else {
+      toast('success','Access Granted',`Welcome back, ${res.user.name.split(' ')[0]}!`);
+      if (res.user.isAdmin) {
+        showPage('page-admin');
+        await initAdminDashboard(res.user);
+      } else {
+        showPage('page-dashboard');
+        await initDashboard(res.user);
+      }
+    }
+  }
   else if(res.needsVerify){pendingEmail=email;$('login-info-msg').textContent='Please confirm your email. Check your inbox or enter OTP below.';$('login-info').classList.add('show');}
   else{$('login-err-msg').textContent=res.msg;$('login-err').classList.add('show');}
 });
 
 $('l-forgot').addEventListener('click',e=>{e.preventDefault();showPage('page-forgot');});
 $('l-eye').addEventListener('click',()=>{const inp=$('l-pass');inp.type=inp.type==='password'?'text':'password';$('l-eye').innerHTML=inp.type==='password'?'<i class="fa-solid fa-eye"></i>':'<i class="fa-solid fa-eye-slash"></i>';});
+$('l-to-admin')?.addEventListener('click',e=>{e.preventDefault();showPage('page-login', ADMIN_LOGIN_HASH);});
 
 /* ═══════════════════════════════════════════════════
    AUTH: REGISTER
@@ -3193,7 +3301,7 @@ document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{
 $('nav-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('nav-reg-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
 $('nav-dashboard-btn')?.addEventListener('click', async e=>{e.preventDefault();await goToDashboard();});
-$('nav-admin-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('nav-admin-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login', ADMIN_LOGIN_HASH);});
 $('nav-brand').addEventListener('click',e=>{e.preventDefault();showPage('page-landing');initLanding();});
 $('nav-user')?.addEventListener('click', async e=>{
   if(e.target.closest('#nav-logout-btn')) return;
@@ -3220,7 +3328,7 @@ $('f-dashboard')?.addEventListener('click',async e=>{e?.preventDefault?.();await
 $('mob-login-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('mob-register-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
 $('mob-dashboard-link')?.addEventListener('click',async e=>{e.preventDefault();await goToDashboard();});
-$('mob-admin-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('mob-admin-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login', ADMIN_LOGIN_HASH);});
 $('mob-logout-link')?.addEventListener('click', async e=>{e.preventDefault();$('nav-logout-btn').click();});
 $('profile-form')?.addEventListener('submit',e=>{e.preventDefault();saveProfileFromForm();});
 $('profile-reset-btn')?.addEventListener('click',()=>resetProfileForm());
