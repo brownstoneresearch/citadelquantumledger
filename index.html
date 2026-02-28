@@ -290,6 +290,26 @@ select.form-control option{background:var(--mid);color:var(--text);}
 .dash-tab:hover{color:var(--text-2);background:rgba(0,68,238,.06);}
 .dash-tab.active{color:var(--cyan);background:rgba(11,15,25,.90);border-color:var(--stroke2);border-bottom-color:rgba(11,15,25,.90);}
 .dash-panel{display:none;}.dash-panel.active{display:block;}
+.page-note{padding:14px 16px;border-radius:var(--r-md);border:1px solid rgba(0,201,240,.18);background:rgba(0,201,240,.06);color:var(--text-2);font-size:.84rem;line-height:1.7;}
+.profile-layout{display:grid;grid-template-columns:320px 1fr;gap:18px;}
+.profile-avatar-shell{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;}
+.profile-avatar-frame{width:108px;height:108px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--void);border:1px solid rgba(0,201,240,.28);box-shadow:0 0 40px rgba(0,68,238,.22);overflow:hidden;background-size:cover;background-position:center;}
+.avatar-edit-btn{position:absolute;top:72px;left:calc(50% + 26px);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;border:1px solid rgba(255,255,255,.16);cursor:pointer;box-shadow:0 12px 24px rgba(0,0,0,.28);transition:transform var(--dur) var(--ease),box-shadow var(--dur);}
+.avatar-edit-btn:hover{transform:translateY(-1px);box-shadow:0 18px 34px rgba(0,0,0,.35);}
+.profile-name-large{font-family:var(--font-d);font-size:1.2rem;font-weight:700;color:var(--text);margin-top:18px;}
+.profile-meta{font-size:.82rem;color:var(--muted);line-height:1.75;}
+.profile-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.profile-textarea{min-height:160px;resize:vertical;}
+.profile-extra-meta{margin-top:10px;font-size:.74rem;color:var(--faint);line-height:1.7;text-align:center;}
+.profile-icon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px;width:100%;}
+.profile-icon-btn{height:42px;border-radius:var(--r-sm);border:1px solid var(--stroke2);background:rgba(4,6,9,.62);color:var(--text-2);cursor:pointer;transition:all .22s;font-size:1rem;}
+.profile-icon-btn:hover{border-color:rgba(0,68,238,.32);color:var(--cyan);background:var(--blue-mist);}
+.profile-icon-btn.active{border-color:rgba(0,201,240,.40);color:var(--cyan);background:rgba(0,201,240,.10);box-shadow:0 0 24px rgba(0,201,240,.10);}
+.profile-inline-actions{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.profile-helper-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap;}
+.profile-helper{font-size:.74rem;color:var(--faint);line-height:1.6;}
+#profile-bio-count{font-family:var(--font-m);font-size:.60rem;letter-spacing:.10em;color:var(--faint);}
+
 .ops-grid{display:grid;grid-template-columns:280px 1fr;gap:18px;margin-bottom:20px;}
 .ops-list{display:flex;flex-direction:column;gap:7px;}
 .op-btn{width:100%;display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r-sm);font-family:var(--font-b);font-size:.80rem;font-weight:500;cursor:pointer;border:1px solid var(--stroke2);background:rgba(17,22,40,.70);color:var(--text-2);transition:all .22s;}
@@ -452,6 +472,10 @@ select.form-control option{background:var(--mid);color:var(--text);}
   .stats-grid{grid-template-columns:1fr 1fr;}
   .adv-list{grid-template-columns:1fr;}
 }
+@media(max-width:1100px){
+  .profile-layout{grid-template-columns:1fr;}
+  .profile-form-grid{grid-template-columns:1fr;}
+}
 @media(max-width:768px){
   .nav-right{display:none;}
   .nav-links{display:none;flex-direction:column;position:absolute;top:58px;right:0;left:auto;width:min(320px,calc(100vw - 24px));background:rgba(2,3,7,.99);border:1px solid var(--stroke2);border-radius:var(--r-lg);padding:10px;gap:3px;z-index:1200;box-shadow:0 24px 70px rgba(0,0,0,.60);}
@@ -513,7 +537,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
       <a href="#" class="btn btn-cyan btn-sm hidden" id="nav-reg-btn">Open Account</a>
       <a href="#/dashboard" class="btn btn-outline btn-sm hidden" id="nav-dashboard-btn">Dashboard</a>
       <a href="#/admin" class="btn btn-primary btn-sm hidden" id="nav-admin-btn">Admin</a>
-      <div class="nav-user hidden" id="nav-user" title="Open dashboard">
+      <div class="nav-user hidden" id="nav-user" title="Open profile editor">
         <div class="nav-avatar" id="nav-avatar">Q</div>
         <span id="nav-username">Client</span>
         <button class="btn btn-ghost btn-sm" id="nav-logout-btn" style="padding:5px 9px;"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
@@ -1125,6 +1149,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
         <div class="dash-tab" data-panel="panel-staking"><i class="fa-solid fa-layer-group"></i>Staking</div>
         <div class="dash-tab" data-panel="panel-trading"><i class="fa-solid fa-arrow-trend-up"></i>Trading</div>
         <div class="dash-tab" data-panel="panel-history"><i class="fa-solid fa-clock-rotate-left"></i>History</div>
+        <div class="dash-tab" data-panel="panel-profile"><i class="fa-solid fa-user-pen"></i>Profile</div>
       </div>
       <div class="dash-panel active" id="panel-overview">
         <div class="ops-grid mb-4">
@@ -1251,6 +1276,77 @@ select.form-control option{background:var(--mid);color:var(--text);}
           <div style="padding:14px 18px;border-top:1px solid var(--stroke2);"><div class="pag" id="pagination"></div></div>
         </div>
       </div>
+      <div class="dash-panel" id="panel-profile">
+        <div class="page-note mb-4">You are logged in. To return to the main dashboard UI at any time, click <strong>Dashboard</strong> in the top-right navigation.</div>
+        <div class="profile-layout">
+          <div class="card card-glow" style="padding:24px;">
+            <div class="profile-avatar-shell">
+              <div class="profile-avatar-frame" id="profile-avatar-preview">Q</div>
+              <label class="avatar-edit-btn" for="profile-photo-input" title="Edit photo icon"><i class="fa-solid fa-camera"></i></label>
+              <input type="file" id="profile-photo-input" accept="image/*" class="hidden"/>
+              <div class="profile-name-large" id="profile-card-name">Client</div>
+              <div class="badge badge-cyan mt-2" id="profile-card-role"><i class="fa-solid fa-badge-check" style="font-size:.45rem;"></i>Client Profile</div>
+              <div class="profile-meta" id="profile-card-location">Global Client</div>
+              <div class="profile-extra-meta" id="profile-card-extra">No bio data set yet.</div>
+              <div class="profile-meta" id="profile-card-bio" style="margin-top:14px;">Add a short bio to personalize your account overview.</div>
+              <div class="profile-icon-grid" id="profile-icon-grid"></div>
+              <div class="profile-inline-actions">
+                <button type="button" class="btn btn-outline btn-sm" id="profile-clear-avatar-btn"><i class="fa-solid fa-eraser"></i>Use Initial</button>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="padding:24px;">
+            <div class="card-header" style="padding:0 0 18px;border-bottom:1px solid var(--stroke2);margin-bottom:20px;">
+              <div>
+                <div class="card-title"><i class="fa-solid fa-user-pen"></i> Profile Editor</div>
+                <div style="font-size:.84rem;color:var(--muted);margin-top:8px;">Update your display details, bio, and profile icon.</div>
+              </div>
+            </div>
+            <form id="profile-form" novalidate>
+              <div class="profile-form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="profile-display-name">Display Name</label>
+                  <input class="form-control" id="profile-display-name" placeholder="Your name"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-role-input">Role / Headline</label>
+                  <input class="form-control" id="profile-role-input" placeholder="Client Profile"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-location-input">Location</label>
+                  <input class="form-control" id="profile-location-input" placeholder="City, Country"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-email">Email</label>
+                  <input class="form-control" id="profile-email" readonly/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-phone-input">Phone Number</label>
+                  <input class="form-control" id="profile-phone-input" placeholder="+1 (000) 000-0000"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-country-input">Country</label>
+                  <input class="form-control" id="profile-country-input" placeholder="Country"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profile-investor-type-input">Investor Type</label>
+                  <input class="form-control" id="profile-investor-type-input" placeholder="Retail / Accredited / Institutional"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="profile-bio-input">Bio</label>
+                <textarea class="form-control profile-textarea" id="profile-bio-input" maxlength="500" placeholder="Tell us a little about this account."></textarea>
+                <div class="profile-helper-row"><span class="profile-helper">Save updates here to manage your display name, headline, location, and bio data from the user dashboard.</span><span id="profile-bio-count">0 / 500</span></div>
+              </div>
+              <div class="flex gap-3 flex-wrap">
+                <button type="submit" class="btn btn-cyan"><i class="fa-solid fa-floppy-disk"></i>Save Profile</button>
+                <button type="button" class="btn btn-ghost" id="profile-reset-btn"><i class="fa-solid fa-rotate-left"></i>Reset</button>
+                <button type="button" class="btn btn-outline" id="profile-go-dashboard-btn"><i class="fa-solid fa-table-columns"></i>Back to Dashboard</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1275,6 +1371,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
             <button class="btn btn-red btn-sm" id="admin-manual-debit-btn"><i class="fa-solid fa-minus"></i>Manual Debit</button>
           </div>
         </div>
+        <div class="page-note mt-3">You are logged in. To return to the main dashboard UI, click <strong>Dashboard</strong> in the navigation.</div>
       </div>
 
       <div class="metrics-row">
@@ -1463,6 +1560,8 @@ let stakingData = {};
 let orderBookInterval = null;
 let miningInterval = null;
 let miningEarnings = [0, 0, 0];
+let stakingInterval = null;
+let currentUserProfile = null;
 
 const $ = id => document.getElementById(id);
 const fmt = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2}).format(n);
@@ -1470,6 +1569,167 @@ const parseAmt = s => parseFloat((s||'').replace(/[$,+]/g,'')) || 0;
 const getBalance = () => transactions.length ? parseAmt(transactions[transactions.length-1].balance) : 0;
 const delay = ms => new Promise(r=>setTimeout(r,ms));
 const isLegacy = () => false;
+
+const getProfileStorageKey = uid => `ql_profile_${uid}`;
+const PROFILE_ICON_OPTIONS = ['fa-user','fa-user-tie','fa-user-astronaut','fa-chart-line','fa-briefcase','fa-shield-halved','fa-landmark','fa-gem'];
+function loadUserProfile(session=currentSession) {
+  const fallbackName = session?.name || 'Client';
+  const defaultHeadline = safeStr(session?.profile?.headline).trim() || (session?.isAdmin ? 'Administrator' : 'Client Profile');
+  const defaultCountry = safeStr(session?.profile?.country).trim();
+  const defaultLocation = safeStr(session?.profile?.location).trim() || defaultCountry || 'Global Client';
+  const payload = {
+    fullName: safeStr(session?.profile?.full_name || session?.profile?.display_name).trim() || fallbackName,
+    headline: defaultHeadline,
+    location: defaultLocation,
+    bio: safeStr(session?.profile?.bio).trim() || 'Add a short bio to personalize your account overview.',
+    avatar:'',
+    avatarIcon: safeStr(session?.profile?.avatar_icon).trim(),
+    phone: safeStr(session?.profile?.phone).trim(),
+    country: defaultCountry,
+    investorType: safeStr(session?.profile?.investor_type).trim()
+  };
+  if (!session?.id) { currentUserProfile = payload; return payload; }
+  try {
+    const raw = localStorage.getItem(getProfileStorageKey(session.id));
+    if (raw) Object.assign(payload, JSON.parse(raw));
+  } catch {}
+  if (!payload.fullName) payload.fullName = fallbackName;
+  currentUserProfile = payload;
+  return payload;
+}
+function saveUserProfile(profile, session=currentSession) {
+  currentUserProfile = profile;
+  if (session?.id) localStorage.setItem(getProfileStorageKey(session.id), JSON.stringify(profile));
+  return profile;
+}
+function applyAvatar(el, avatar, fallbackText, avatarIcon='') {
+  if (!el) return;
+  if (avatar) {
+    el.style.backgroundImage = `url(${avatar})`;
+    el.innerHTML = '';
+    el.textContent = '';
+    return;
+  }
+  el.style.backgroundImage = '';
+  if (avatarIcon) {
+    el.innerHTML = `<i class="fa-solid ${avatarIcon}"></i>`;
+    return;
+  }
+  el.innerHTML = '';
+  el.textContent = fallbackText || 'Q';
+}
+function applyUserProfile(profile=currentUserProfile) {
+  const session = currentSession || Auth._getCached();
+  const displayName = profile?.fullName || session?.name || 'Client';
+  const shortName = displayName.split(' ')[0] || displayName;
+  const avatarFallback = (shortName[0] || 'Q').toUpperCase();
+  const headline = profile?.headline || profile?.role || (session?.isAdmin ? 'Administrator' : 'Client Profile');
+  const extraMeta = [profile?.country || '', profile?.investorType || '', profile?.phone || ''].filter(Boolean).join(' · ') || 'No bio data set yet.';
+  if ($('nav-username')) $('nav-username').textContent = session?.isAdmin ? `${shortName} · Admin` : shortName;
+  if ($('dash-name')) $('dash-name').textContent = shortName;
+  if ($('profile-card-name')) $('profile-card-name').textContent = displayName;
+  if ($('profile-card-bio')) $('profile-card-bio').textContent = profile?.bio || 'Add a short bio to personalize your account overview.';
+  if ($('profile-card-location')) $('profile-card-location').textContent = profile?.location || 'Global Client';
+  if ($('profile-card-extra')) $('profile-card-extra').textContent = extraMeta;
+  if ($('profile-card-role')) $('profile-card-role').innerHTML = `<i class="fa-solid fa-badge-check" style="font-size:.45rem;"></i>${headline}`;
+  if ($('profile-bio-count')) $('profile-bio-count').textContent = `${safeStr(profile?.bio).length} / 500`;
+  renderProfileIconGrid(profile?.avatarIcon || '');
+  applyAvatar($('nav-avatar'), profile?.avatar, avatarFallback, profile?.avatarIcon);
+  applyAvatar($('profile-avatar-preview'), profile?.avatar, avatarFallback, profile?.avatarIcon);
+}
+function initProfilePanel(session=currentSession) {
+  const profile = loadUserProfile(session);
+  if ($('profile-display-name')) $('profile-display-name').value = profile.fullName || session?.name || '';
+  if ($('profile-role-input')) $('profile-role-input').value = profile.headline || profile.role || (session?.isAdmin ? 'Administrator' : 'Client Profile');
+  if ($('profile-location-input')) $('profile-location-input').value = profile.location || '';
+  if ($('profile-email')) $('profile-email').value = session?.email || '';
+  if ($('profile-phone-input')) $('profile-phone-input').value = profile.phone || '';
+  if ($('profile-country-input')) $('profile-country-input').value = profile.country || '';
+  if ($('profile-investor-type-input')) $('profile-investor-type-input').value = profile.investorType || '';
+  if ($('profile-bio-input')) $('profile-bio-input').value = profile.bio || '';
+  applyUserProfile(profile);
+}
+function renderProfileIconGrid(selected='') {
+  const wrap = $('profile-icon-grid');
+  if (!wrap) return;
+  wrap.innerHTML = PROFILE_ICON_OPTIONS.map(icon => `<button type="button" class="profile-icon-btn ${selected===icon?'active':''}" data-icon="${icon}" title="${icon.replace('fa-','').replace(/-/g,' ')}"><i class="fa-solid ${icon}"></i></button>`).join('');
+}
+async function saveProfileFromForm() {
+  if (!currentSession) return;
+  const profile = {
+    ...(currentUserProfile || loadUserProfile(currentSession)),
+    fullName: $('profile-display-name')?.value.trim() || currentSession.name || 'Client',
+    headline: $('profile-role-input')?.value.trim() || (currentSession?.isAdmin ? 'Administrator' : 'Client Profile'),
+    location: $('profile-location-input')?.value.trim() || ($('profile-country-input')?.value.trim() || safeStr(currentSession?.profile?.country).trim() || 'Global Client'),
+    phone: $('profile-phone-input')?.value.trim() || '',
+    country: $('profile-country-input')?.value.trim() || '',
+    investorType: $('profile-investor-type-input')?.value.trim() || '',
+    bio: $('profile-bio-input')?.value.trim() || 'Add a short bio to personalize your account overview.'
+  };
+  saveUserProfile(profile, currentSession);
+  applyUserProfile(profile);
+  const cloud = await Auth.updateBioProfile(profile);
+  if (cloud.ok) {
+    currentSession = { ...cloud.user, name: profile.fullName, profile: { ...(cloud.user?.profile || {}), phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' } };
+    Auth._cache(currentSession);
+    toast('success','Profile Updated','Your bio data and profile details have been saved.');
+  } else {
+    currentSession.name = profile.fullName;
+    currentSession.profile = { ...(currentSession.profile || {}), phone: profile.phone, country: profile.country, investor_type: profile.investorType, avatar_icon: profile.avatarIcon || '' };
+    Auth._cache(currentSession);
+    toast('warning','Saved In This Browser','Your bio data was saved locally, but cloud sync could not be completed right now.');
+  }
+}
+function resetProfileForm() {
+  initProfilePanel(currentSession);
+}
+function setProfileAvatarIcon(icon='') {
+  if (!currentSession) return;
+  const profile = { ...(currentUserProfile || loadUserProfile(currentSession)), avatar:'', avatarIcon:icon };
+  saveUserProfile(profile, currentSession);
+  applyUserProfile(profile);
+  toast('success','Profile Icon Updated','Your profile icon has been updated.');
+}
+function clearProfileAvatar() {
+  if (!currentSession) return;
+  const profile = { ...(currentUserProfile || loadUserProfile(currentSession)), avatar:'', avatarIcon:'' };
+  saveUserProfile(profile, currentSession);
+  applyUserProfile(profile);
+}
+function previewProfileDraft() {
+  const session = currentSession || Auth._getCached();
+  const profile = {
+    ...(currentUserProfile || loadUserProfile(session)),
+    fullName: $('profile-display-name')?.value.trim() || session?.name || 'Client',
+    headline: $('profile-role-input')?.value.trim() || (session?.isAdmin ? 'Administrator' : 'Client Profile'),
+    location: $('profile-location-input')?.value.trim() || ($('profile-country-input')?.value.trim() || safeStr(session?.profile?.country).trim() || 'Global Client'),
+    phone: $('profile-phone-input')?.value.trim() || '',
+    country: $('profile-country-input')?.value.trim() || '',
+    investorType: $('profile-investor-type-input')?.value.trim() || '',
+    bio: $('profile-bio-input')?.value.trim() || ''
+  };
+  if ($('profile-card-name')) $('profile-card-name').textContent = profile.fullName || 'Client';
+  if ($('profile-card-role')) $('profile-card-role').innerHTML = `<i class="fa-solid fa-badge-check" style="font-size:.45rem;"></i>${profile.headline}`;
+  if ($('profile-card-location')) $('profile-card-location').textContent = profile.location || 'Global Client';
+  if ($('profile-card-bio')) $('profile-card-bio').textContent = profile.bio || 'Add a short bio to personalize your account overview.';
+  if ($('profile-card-extra')) $('profile-card-extra').textContent = [profile.country, profile.investorType, profile.phone].filter(Boolean).join(' · ') || 'No bio data set yet.';
+  if ($('profile-bio-count')) $('profile-bio-count').textContent = `${safeStr(profile.bio).length} / 500`;
+}
+async function openDashboardProfile() {
+  const session = currentSession || await Auth.getSession();
+  if (!session) { showPage('page-login'); return; }
+  showPage('page-dashboard');
+  await initDashboard(session);
+  switchTab('panel-profile');
+}
+async function goToDashboard() {
+  const session = currentSession || await Auth.getSession();
+  if (!session) { showPage('page-login'); return; }
+  showPage('page-dashboard');
+  await initDashboard(session);
+  switchTab('panel-overview');
+}
+
 
 const SEED_TXS = [
   {date:"2024-07-01",type:"Initial Deposit",amount:"$14,200.00",balance:"$14,200.00"},
@@ -1516,6 +1776,8 @@ const ADMIN_ROLE_NAMES = new Set(['admin','administrator','superadmin','super_ad
 const ADMIN_EMAIL_ALLOWLIST = Array.isArray(window.CITADEL_ADMIN_EMAILS) ? window.CITADEL_ADMIN_EMAILS.map(v=>String(v||'').trim().toLowerCase()) : [];
 function safeStr(v){ return v == null ? '' : String(v); }
 function getProfileName(profile, fallback='Client') {
+  const full = safeStr(profile?.full_name || profile?.display_name).trim();
+  if (full) return full;
   const first = safeStr(profile?.first_name).trim();
   const last = safeStr(profile?.last_name).trim();
   if (first || last) return [first,last].filter(Boolean).join(' ');
@@ -1541,9 +1803,10 @@ async function fetchProfile(userId) {
   return data?.[0] || null;
 }
 function buildSessionUser(user, profile) {
-  const name = getProfileName(profile, user?.email || 'Client');
-  const role = getProfileRole(profile, user);
-  return { id:user?.id, name, email:user?.email, role, isAdmin:deriveIsAdmin(user, profile), profile:profile || null, isLegacy:false };
+  const mergedProfile = { ...(profile || {}), ...(user?.user_metadata || {}) };
+  const name = getProfileName(mergedProfile, user?.email || 'Client');
+  const role = getProfileRole(mergedProfile, user);
+  return { id:user?.id, name, email:user?.email, role, isAdmin:deriveIsAdmin(user, mergedProfile), profile:mergedProfile || null, dbProfile:profile || null, isLegacy:false };
 }
 const Auth = {
   async register({ firstName, lastName, email, phone, country, type, password }) {
@@ -1584,6 +1847,36 @@ const Auth = {
   async resendOTP(email) {
     const { error } = await _sb.auth.resend({ type:'signup', email });
     return error ? { ok:false, msg:error.message } : { ok:true };
+  },
+  async updateBioProfile(profileDraft) {
+    const { data: userData, error: userError } = await _sb.auth.getUser();
+    if (userError || !userData?.user) return { ok:false, msg:userError?.message || 'You must be signed in to update your bio data.' };
+    const sbUser = userData.user;
+    const nextMeta = {
+      ...(sbUser.user_metadata || {}),
+      full_name: safeStr(profileDraft?.fullName).trim(),
+      display_name: safeStr(profileDraft?.fullName).trim(),
+      headline: safeStr(profileDraft?.headline).trim(),
+      location: safeStr(profileDraft?.location).trim(),
+      bio: safeStr(profileDraft?.bio).trim(),
+      phone: safeStr(profileDraft?.phone).trim(),
+      country: safeStr(profileDraft?.country).trim(),
+      investor_type: safeStr(profileDraft?.investorType).trim(),
+      avatar_icon: safeStr(profileDraft?.avatarIcon).trim()
+    };
+    const { data, error } = await _sb.auth.updateUser({ data: nextMeta });
+    if (error) return { ok:false, msg:error.message };
+    try {
+      await _sb.from('profiles').upsert({
+        id: sbUser.id,
+        phone: safeStr(profileDraft?.phone).trim() || null,
+        country: safeStr(profileDraft?.country).trim() || null,
+        investor_type: safeStr(profileDraft?.investorType).trim() || null
+      });
+    } catch {}
+    const user = await this._sessionFromSupabaseUser(data.user || sbUser);
+    this._cache(user);
+    return { ok:true, user };
   },
   async refreshSession() {
     const { data } = await _sb.auth.getSession();
@@ -1910,6 +2203,8 @@ async function refreshAdminDashboard(opts = {}) {
   renderAdminLedger();
 }
 async function initAdminDashboard(session) {
+  currentSession = session || currentSession;
+  if (currentSession) applyUserProfile(loadUserProfile(currentSession));
   if (!session?.isAdmin) {
     toast('warning', 'Access Restricted', 'Only administrators can open the admin dashboard.');
     if (session) {
@@ -2060,8 +2355,8 @@ function updateNav() {
   $('mob-admin-item')?.classList.toggle('hidden', !isAdmin);
   $('mob-logout-item')?.classList.toggle('hidden', !loggedIn);
   if (loggedIn) {
-    $('nav-username').textContent = isAdmin ? `${session.name.split(' ')[0]} · Admin` : session.name.split(' ')[0];
-    $('nav-avatar').textContent = session.name[0]?.toUpperCase() || 'Q';
+    const profile = loadUserProfile(session);
+    applyUserProfile(profile);
   }
   const activePage = document.querySelector('.page.active')?.id || '';
   document.querySelectorAll('.nav-links a[data-page]').forEach(link => link.classList.toggle('active', link.dataset.page === activePage));
@@ -2095,6 +2390,7 @@ async function route() {
     if (session) {
       showPage('page-dashboard');
       await initDashboard(session);
+      switchTab('panel-overview');
     } else {
       showPage('page-login');
     }
@@ -2396,7 +2692,8 @@ async function initDashboard(session) {
   if(!session){const s=await Auth.getSession();session=s;}
   if(!session){showPage('page-login');return;}
   currentSession=session;
-  $('dash-name').textContent=session.name.split(' ')[0];
+  initProfilePanel(session);
+  $('dash-name').textContent=(currentUserProfile?.fullName || session.name).split(' ')[0];
   $('m-balance').textContent='—'; $('m-txcount').textContent='…';
   await TxStore.load(session.id, isLegacy());
   TxStore.subscribe(session.id, (newTx, eventType='INSERT')=>{
@@ -2576,6 +2873,7 @@ const STAKING_POOLS = [
 ];
 
 function initStaking() {
+  if(stakingInterval) clearInterval(stakingInterval);
   // Default staked amounts
   if(!Object.keys(stakingData).length) {
     if(isLegacy()) {
@@ -2585,7 +2883,7 @@ function initStaking() {
     }
   }
   renderStakingPools();
-  setInterval(()=>{
+  stakingInterval=setInterval(()=>{
     STAKING_POOLS.forEach(p=>{if(stakingData[p.id]?.staked>0) stakingData[p.id].earned+=stakingData[p.id].staked*(p.apy/100/365/24/12);});
     renderStakingPools();
   }, 5000);
@@ -2894,15 +3192,12 @@ document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{
 ═══════════════════════════════════════════════════ */
 $('nav-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('nav-reg-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
-$('nav-dashboard-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('nav-dashboard-btn')?.addEventListener('click', async e=>{e.preventDefault();await goToDashboard();});
 $('nav-admin-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
 $('nav-brand').addEventListener('click',e=>{e.preventDefault();showPage('page-landing');initLanding();});
 $('nav-user')?.addEventListener('click', async e=>{
   if(e.target.closest('#nav-logout-btn')) return;
-  const s = await Auth.getSession();
-  if(!s) return;
-  if(s.isAdmin){showPage('page-admin');await initAdminDashboard(s);}
-  else {showPage('page-dashboard');await initDashboard(s);}
+  await openDashboardProfile();
 });
 $('hero-start-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
 $('hero-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
@@ -2921,20 +3216,55 @@ $('go-to-verify')?.addEventListener('click',e=>{e.preventDefault();showPage('pag
 $('f-login')?.addEventListener('click',()=>showPage('page-login'));
 $('f-register')?.addEventListener('click',()=>showPage('page-register'));
 $('f-verify')?.addEventListener('click',()=>showPage('page-verify'));
-$('f-dashboard')?.addEventListener('click',async()=>{const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('f-dashboard')?.addEventListener('click',async e=>{e?.preventDefault?.();await goToDashboard();});
 $('mob-login-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('mob-register-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
-$('mob-dashboard-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('mob-dashboard-link')?.addEventListener('click',async e=>{e.preventDefault();await goToDashboard();});
 $('mob-admin-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
 $('mob-logout-link')?.addEventListener('click', async e=>{e.preventDefault();$('nav-logout-btn').click();});
+$('profile-form')?.addEventListener('submit',e=>{e.preventDefault();saveProfileFromForm();});
+$('profile-reset-btn')?.addEventListener('click',()=>resetProfileForm());
+$('profile-go-dashboard-btn')?.addEventListener('click',()=>switchTab('panel-overview'));
+$('profile-clear-avatar-btn')?.addEventListener('click',()=>clearProfileAvatar());
+['profile-display-name','profile-role-input','profile-location-input','profile-phone-input','profile-country-input','profile-investor-type-input','profile-bio-input'].forEach(id=>$(id)?.addEventListener('input',()=>previewProfileDraft()));
+$('profile-icon-grid')?.addEventListener('click',e=>{
+  const btn = e.target.closest('.profile-icon-btn');
+  if(!btn) return;
+  setProfileAvatarIcon(btn.dataset.icon || '');
+});
+$('profile-photo-input')?.addEventListener('change',e=>{
+  const file=e.target.files?.[0];
+  if(!file) return;
+  if(file.size > 2 * 1024 * 1024){
+    toast('error','Image Too Large','Choose an image under 2 MB for the profile icon.');
+    e.target.value='';
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try {
+      const profile={...(currentUserProfile||loadUserProfile(currentSession)),avatar:reader.result,avatarIcon:''};
+      saveUserProfile(profile,currentSession);
+      applyUserProfile(profile);
+      toast('success','Profile Photo Updated','Your photo icon has been updated.');
+    } catch (err) {
+      toast('error','Photo Update Failed','Could not save that image. Try a smaller file.');
+    } finally {
+      e.target.value='';
+    }
+  };
+  reader.readAsDataURL(file);
+});
+
 // Logout
 $('nav-logout-btn').addEventListener('click', async e=>{
   e.stopPropagation();
   if(realtimeChannel&&_sb)_sb.removeChannel(realtimeChannel);
   if(miningInterval)clearInterval(miningInterval);
   if(orderBookInterval)clearInterval(orderBookInterval);
+  if(stakingInterval)clearInterval(stakingInterval);
   await Auth.logout();
-  transactions=[]; currentSession=null; stakingData={};
+  transactions=[]; currentSession=null; currentUserProfile=null; stakingData={};
   adminState.profiles=[]; adminState.transactions=[]; adminState.users=[]; adminState.selectedUserId=null;
   showPage('page-landing'); initLanding();
   toast('info','Signed Out','You have been securely signed out.');
