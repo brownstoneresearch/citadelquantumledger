@@ -109,7 +109,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
 .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;background:rgba(2,3,7,.92);border-bottom:1px solid rgba(0,68,238,.10);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);transition:background .3s,box-shadow .3s;}
 .navbar.scrolled{background:rgba(2,3,7,.99);box-shadow:0 4px 56px rgba(0,0,0,.65);}
 .navbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,var(--blue-lt) 20%,var(--cyan) 50%,var(--blue-lt) 80%,transparent 100%);opacity:.22;}
-.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;}
 .nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer;flex:0 0 auto;}
 .nav-brand img{height:26px;width:auto;filter:brightness(2.0) contrast(1.1);}
 .brand-text{font-family:var(--font-d);font-size:.88rem;font-weight:800;letter-spacing:.06em;background:linear-gradient(135deg,var(--blue-br),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -411,6 +411,36 @@ select.form-control option{background:var(--mid);color:var(--text);}
 .legal-doc p{margin-bottom:20px;}
 .faq-cat-btn{width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r-sm);font-family:var(--font-m);font-size:.62rem;letter-spacing:.10em;text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:var(--faint);transition:.2s;text-align:left;}
 .faq-cat-btn:hover,.faq-cat-btn.active{background:var(--blue-mist);color:var(--cyan);}
+
+.nav-mobile-only,.nav-mobile-divider{display:none;}
+#nav-user{cursor:pointer;}
+.admin-grid{display:grid;grid-template-columns:340px 1fr;gap:18px;margin-bottom:20px;}
+.admin-search{min-width:220px;max-width:280px;}
+.admin-list{display:flex;flex-direction:column;gap:10px;max-height:640px;overflow:auto;}
+.admin-user-card{padding:14px 15px;background:rgba(11,15,25,.78);border:1px solid var(--stroke2);border-radius:var(--r-md);cursor:pointer;transition:border-color .24s,transform .24s,box-shadow .24s;}
+.admin-user-card:hover{border-color:rgba(0,68,238,.30);transform:translateY(-2px);}
+.admin-user-card.active{border-color:rgba(0,201,240,.36);background:rgba(0,68,238,.08);box-shadow:0 0 40px rgba(0,68,238,.08);}
+.admin-user-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.admin-user-name{font-family:var(--font-d);font-size:.90rem;font-weight:700;color:var(--text);}
+.admin-user-id{font-family:var(--font-m);font-size:.58rem;color:var(--faint);margin-top:2px;word-break:break-all;}
+.admin-user-meta{display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--muted);padding-top:6px;border-top:1px solid var(--stroke3);margin-top:6px;}
+.admin-user-meta strong{font-family:var(--font-m);font-size:.72rem;color:var(--text-2);}
+.admin-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.admin-empty{padding:22px;border:1px dashed var(--stroke2);border-radius:var(--r-md);font-size:.82rem;color:var(--muted);line-height:1.7;text-align:center;}
+.request-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.admin-selected-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;}
+.admin-kpi{padding:12px;background:rgba(4,6,9,.66);border:1px solid var(--stroke2);border-radius:var(--r-sm);}
+.admin-kpi-lbl{font-family:var(--font-m);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;}
+.admin-kpi-val{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--cyan);}
+.admin-kpi-val.green{color:var(--green);}
+.admin-kpi-val.amber{color:var(--amber);}
+.admin-kpi-val.red{color:var(--red);}
+.admin-helper{font-size:.75rem;color:var(--muted);line-height:1.7;}
+@media(max-width:1100px){
+  .admin-grid{grid-template-columns:1fr;}
+  .admin-selected-grid{grid-template-columns:1fr 1fr;}
+}
+
 @media(max-width:1100px){
   .hero{grid-template-columns:1fr;padding:48px 0 64px;}
   .hero-right{display:none;}
@@ -423,9 +453,13 @@ select.form-control option{background:var(--mid);color:var(--text);}
   .adv-list{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
-  .nav-links{display:none;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(2,3,7,.99);border-bottom:1px solid var(--stroke2);padding:10px;gap:2px;z-index:999;}
+  .nav-right{display:none;}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:58px;right:0;left:auto;width:min(320px,calc(100vw - 24px));background:rgba(2,3,7,.99);border:1px solid var(--stroke2);border-radius:var(--r-lg);padding:10px;gap:3px;z-index:1200;box-shadow:0 24px 70px rgba(0,0,0,.60);}
   .nav-links.open{display:flex;}
-  .nav-links a{padding:11px 14px;border-radius:var(--r-sm);}
+  .nav-links li{width:100%;}
+  .nav-links a{display:flex;padding:11px 14px;border-radius:var(--r-sm);width:100%;}
+  .nav-mobile-only{display:block;}
+  .nav-mobile-divider{display:block;height:1px;background:var(--stroke2);margin:5px 2px;}
   .nav-toggle{display:flex;}
   .metrics-row{grid-template-columns:1fr 1fr;}
   .feat-grid{grid-template-columns:1fr;}
@@ -438,6 +472,11 @@ select.form-control option{background:var(--mid);color:var(--text);}
   .form-row{grid-template-columns:1fr;}
   .cta-card{padding:44px 26px;}
   .hero h1{font-size:clamp(2.4rem,9vw,4rem);}
+  .admin-toolbar{align-items:stretch;}
+  .admin-search{max-width:none;width:100%;}
+}
+@media(min-width:769px){
+  .nav-mobile-only,.nav-mobile-divider{display:none!important;}
 }
 @media(max-width:480px){
   .metrics-row{grid-template-columns:1fr;}
@@ -462,11 +501,19 @@ select.form-control option{background:var(--mid);color:var(--text);}
       <li><a href="#/performance" id="nl-performance" data-page="page-performance">Performance</a></li>
       <li><a href="#/markets" id="nl-markets" data-page="page-markets">Markets</a></li>
       <li><a href="#/why-citadel" id="nl-why-citadel" data-page="page-why-citadel">Why Citadel</a></li>
+      <li class="nav-mobile-divider"></li>
+      <li class="nav-mobile-only hidden" id="mob-login-item"><a href="#/login" id="mob-login-link">Client Login</a></li>
+      <li class="nav-mobile-only hidden" id="mob-register-item"><a href="#/register" id="mob-register-link">Open Account</a></li>
+      <li class="nav-mobile-only hidden" id="mob-dashboard-item"><a href="#/dashboard" id="mob-dashboard-link">Dashboard</a></li>
+      <li class="nav-mobile-only hidden" id="mob-admin-item"><a href="#/admin" id="mob-admin-link">Admin Dashboard</a></li>
+      <li class="nav-mobile-only hidden" id="mob-logout-item"><a href="#" id="mob-logout-link">Logout</a></li>
     </ul>
     <div class="nav-right">
       <a href="#" class="btn btn-outline btn-sm hidden" id="nav-login-btn">Login</a>
       <a href="#" class="btn btn-cyan btn-sm hidden" id="nav-reg-btn">Open Account</a>
-      <div class="nav-user hidden" id="nav-user">
+      <a href="#/dashboard" class="btn btn-outline btn-sm hidden" id="nav-dashboard-btn">Dashboard</a>
+      <a href="#/admin" class="btn btn-primary btn-sm hidden" id="nav-admin-btn">Admin</a>
+      <div class="nav-user hidden" id="nav-user" title="Open dashboard">
         <div class="nav-avatar" id="nav-avatar">Q</div>
         <span id="nav-username">Client</span>
         <button class="btn btn-ghost btn-sm" id="nav-logout-btn" style="padding:5px 9px;"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
@@ -594,7 +641,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
           <div class="adv-item"><div class="adv-dot"></div><span><strong>4× Quantum Yield:</strong> Proprietary compounding strategy targets 4× return on initial capital through diversified alpha sources.</span></div>
           <div class="adv-item"><div class="adv-dot"></div><span><strong>Institutional Custody:</strong> Assets in qualified cold storage with $250M crime insurance from Lloyd's of London.</span></div>
           <div class="adv-item"><div class="adv-dot"></div><span><strong>Automated Operations:</strong> Supabase-powered real-time automation — profits, losses, and transactions processed without delay.</span></div>
-          <div class="adv-item"><div class="adv-dot"></div><span><strong>24/7 Admin Support:</strong> Direct WhatsApp access to fund administrators and quant analysts for priority service.</span></div>
+          <div class="adv-item"><div class="adv-dot"></div><span><strong>24/7 Admin Operations:</strong> Deposit, withdrawal, and ledger requests are routed through the protected admin dashboard for fast review.</span></div>
         </div>
         <a href="#" class="btn btn-cyan" id="adv-start-btn"><i class="fa-solid fa-arrow-right"></i>Begin Your Application</a>
       </div>
@@ -1087,8 +1134,8 @@ select.form-control option{background:var(--mid);color:var(--text);}
               <button class="op-btn" data-tab="panel-mining"><div class="op-icon"><i class="fa-solid fa-microchip"></i></div><span>Mining Control</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" data-tab="panel-staking"><div class="op-icon"><i class="fa-solid fa-layer-group"></i></div><span>Stake Assets</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" data-tab="panel-trading"><div class="op-icon"><i class="fa-solid fa-arrow-trend-up"></i></div><span>Execute Trade</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" id="open-deposit-btn"><div class="op-icon"><i class="fa-solid fa-arrow-down-to-bracket"></i></div><span>Initiate Deposit</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" id="withdraw-btn"><div class="op-icon" style="background:rgba(255,51,85,.12);color:var(--red);"><i class="fa-solid fa-arrow-up-from-bracket"></i></div><span>Instant Withdrawal</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
+              <button class="op-btn" id="open-deposit-btn"><div class="op-icon"><i class="fa-solid fa-arrow-down-to-bracket"></i></div><span>Request Deposit</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
+              <button class="op-btn" id="withdraw-btn"><div class="op-icon" style="background:rgba(255,51,85,.12);color:var(--red);"><i class="fa-solid fa-arrow-up-from-bracket"></i></div><span>Request Withdrawal</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
             </div>
           </div>
           <div class="card" style="padding:0;overflow:hidden;">
@@ -1208,6 +1255,98 @@ select.form-control option{background:var(--mid);color:var(--text);}
   </div>
 </div>
 
+
+<!-- ══════════════════════════
+     ADMIN DASHBOARD PAGE
+══════════════════════════ -->
+<div id="page-admin" class="page">
+  <div class="dash-container">
+    <div class="container">
+      <div class="dash-header">
+        <div class="flex-between flex-wrap gap-3">
+          <div>
+            <div class="sec-eye"><i class="fa-solid fa-user-shield fa-xs"></i>Restricted Access</div>
+            <div class="dash-welcome">Admin Control Center</div>
+            <div class="dash-sub">Manage client ledgers, review platform activity, and approve deposit and withdrawal requests.</div>
+          </div>
+          <div class="admin-toolbar">
+            <button class="btn btn-ghost btn-sm" id="admin-refresh-btn"><i class="fa-solid fa-rotate"></i>Refresh</button>
+            <button class="btn btn-cyan btn-sm" id="admin-manual-credit-btn"><i class="fa-solid fa-plus"></i>Manual Credit</button>
+            <button class="btn btn-red btn-sm" id="admin-manual-debit-btn"><i class="fa-solid fa-minus"></i>Manual Debit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="met-card"><div class="met-lbl">Total Users</div><div class="met-val" id="admin-users-count">0</div><div class="met-desc">Profiles with ledger activity</div></div>
+        <div class="met-card"><div class="met-lbl">Pending Requests</div><div class="met-val amber" id="admin-pending-count">0</div><div class="met-desc">Awaiting approval</div></div>
+        <div class="met-card"><div class="met-lbl">Ledger Volume</div><div class="met-val green" id="admin-ledger-volume">$0.00</div><div class="met-desc">Across all transactions</div></div>
+        <div class="met-card"><div class="met-lbl">Client Balances</div><div class="met-val" id="admin-total-balance">$0.00</div><div class="met-desc">Combined current balance</div></div>
+      </div>
+
+      <div class="card mb-4" style="padding:0;overflow:hidden;">
+        <div class="card-header">
+          <span class="card-title"><i class="fa-solid fa-inbox"></i>Pending Deposit &amp; Withdrawal Requests</span>
+          <span class="badge badge-amber" id="admin-pending-badge">0 Pending</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tx-table">
+            <thead><tr><th>Date</th><th>User</th><th>Request</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="admin-request-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="card-header">
+            <span class="card-title"><i class="fa-solid fa-users"></i>User Directory</span>
+            <div class="admin-search">
+              <input type="search" class="form-control" id="admin-user-search" placeholder="Search name, email, or user ID"/>
+            </div>
+          </div>
+          <div class="card-body admin-list" id="admin-user-list"></div>
+        </div>
+
+        <div class="card" style="padding:0;overflow:hidden;">
+          <div class="card-header">
+            <span class="card-title"><i class="fa-solid fa-wallet"></i>Selected User Workspace</span>
+            <span class="badge badge-blue" id="admin-selected-role">User</span>
+          </div>
+          <div class="card-body">
+            <div id="admin-selected-user"></div>
+            <div class="card mt-4" style="padding:0;overflow:hidden;">
+              <div class="card-header">
+                <span class="card-title"><i class="fa-solid fa-clock-rotate-left"></i>Selected User Transactions</span>
+                <span class="badge badge-ghost" id="admin-selected-count">0 Entries</span>
+              </div>
+              <div style="overflow-x:auto;">
+                <table class="tx-table">
+                  <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead>
+                  <tbody id="admin-selected-user-tx-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="card-header">
+          <span class="card-title"><i class="fa-solid fa-receipt"></i>Latest Platform Transactions</span>
+          <span class="badge badge-green" id="admin-activity-badge">Ledger Activity</span>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="tx-table">
+            <thead><tr><th>Date</th><th>User</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead>
+            <tbody id="admin-all-tx-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -1250,29 +1389,15 @@ select.form-control option{background:var(--mid);color:var(--text);}
 <!-- ══ WITHDRAWAL MODAL ══ -->
 <div class="modal-back" id="withdrawal-modal">
   <div class="modal" style="max-width:460px;">
-    <div class="modal-hdr"><span class="modal-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--red);margin-right:8px;"></i>Withdrawal Authorization</span><button class="modal-close" id="close-w-modal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-hdr"><span class="modal-title"><i class="fa-solid fa-hourglass-half" style="color:var(--amber);margin-right:8px;"></i>Withdrawal Request Submitted</span><button class="modal-close" id="close-w-modal"><i class="fa-solid fa-xmark"></i></button></div>
     <div class="modal-body">
-      <div class="text-center" style="padding:6px 0 18px;">
-        <div style="width:60px;height:60px;border-radius:50%;background:var(--red-dim);border:1px solid rgba(255,51,85,.22);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.5rem;">❌</div>
-        <div style="font-family:var(--font-d);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:9px;">Withdrawal Requires Authorization</div>
-        <div style="font-size:.84rem;color:var(--muted);line-height:1.76;margin-bottom:20px;">Your withdrawal requires administrator approval to protect against unauthorized access. Contact your account administrator on WhatsApp to complete this request.</div>
-        <div style="background:rgba(0,68,238,.05);border:1px solid rgba(0,68,238,.15);border-radius:var(--r-lg);padding:16px;text-align:left;margin-bottom:18px;">
-          <div class="flex gap-2 mb-2">
-            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#00A854,#25D366);display:flex;align-items:center;justify-content:center;flex:0 0 40px;font-size:1.1rem;">💬</div>
-            <div><div style="font-family:var(--font-d);font-size:.80rem;font-weight:700;color:var(--text);">Account Administrator</div><div style="font-family:var(--font-m);font-size:.68rem;color:var(--cyan);">+1 (510) 912-4846</div></div>
-            <span class="badge badge-green" style="margin-left:auto;"><i class="fa-solid fa-circle" style="font-size:.40rem;"></i>Online</span>
-          </div>
-          <div style="font-size:.76rem;color:var(--muted);line-height:1.60;">Response typically within <strong style="color:var(--green);">minutes</strong> · Available 24/7</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
-          <div style="padding:9px;background:rgba(11,15,25,.80);border:1px solid var(--stroke2);border-radius:var(--r-sm);"><div style="font-family:var(--font-m);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px;">Response Time</div><div style="color:var(--text-2);font-size:.80rem;font-weight:500;">Under 10 min</div></div>
-          <div style="padding:9px;background:rgba(11,15,25,.80);border:1px solid var(--stroke2);border-radius:var(--r-sm);"><div style="font-family:var(--font-m);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:3px;">Availability</div><div style="color:var(--text-2);font-size:.80rem;font-weight:500;">24 / 7</div></div>
-        </div>
+      <div class="alert alert-info show" style="margin-bottom:16px;"><i class="fa-solid fa-circle-info"></i><span>Your withdrawal request has been added to the admin queue. An administrator must approve it before the balance is released.</span></div>
+      <div style="padding:14px;background:rgba(4,6,9,.80);border:1px solid var(--stroke2);border-radius:var(--r-md);font-size:.80rem;color:var(--muted);line-height:1.7;">
+        Deposits, withdrawals, and manual ledger adjustments are now handled from the protected admin dashboard. Users can submit requests, but only admins can approve and complete them.
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn btn-ghost" id="cancel-w-modal">Cancel</button>
-      <a href="https://wa.me/15109124846?text=Hello%2C+I+would+like+to+initiate+a+withdrawal+from+my+Citadel+Quantum+Ledger+account.+Please+assist+me+with+authorization." target="_blank" rel="noopener noreferrer" class="btn btn-green" id="wa-btn" style="background:linear-gradient(135deg,#00A854,#25D366);border-color:#25D366;color:var(--void);"><i class="fa-brands fa-whatsapp" style="font-size:.95rem;"></i>Contact on WhatsApp</a>
+      <button class="btn btn-ghost" id="cancel-w-modal">Close</button>
     </div>
   </div>
 </div>
@@ -1280,7 +1405,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
 <!-- ══ DEPOSIT MODAL ══ -->
 <div class="modal-back" id="deposit-modal">
   <div class="modal">
-    <div class="modal-hdr"><span class="modal-title"><i class="fa-solid fa-arrow-down-to-bracket" style="color:var(--cyan);margin-right:8px;"></i>Initiate Deposit</span><button class="modal-close" id="close-dep-modal"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-hdr"><span class="modal-title"><i class="fa-solid fa-arrow-down-to-bracket" style="color:var(--cyan);margin-right:8px;"></i>Request Deposit</span><button class="modal-close" id="close-dep-modal"><i class="fa-solid fa-xmark"></i></button></div>
     <div class="modal-body">
       <form id="deposit-form" novalidate>
         <p class="form-label mb-2">1. Select Currency</p>
@@ -1303,7 +1428,7 @@ select.form-control option{background:var(--mid);color:var(--text);}
         <div class="alert alert-error mt-3" id="dep-alert"><i class="fa-solid fa-circle-exclamation"></i><span id="dep-alert-msg"></span></div>
       </form>
     </div>
-    <div class="modal-foot"><button class="btn btn-ghost" id="cancel-dep">Cancel</button><button class="btn btn-cyan" id="confirm-dep">Confirm Deposit</button></div>
+    <div class="modal-foot"><button class="btn btn-ghost" id="cancel-dep">Cancel</button><button class="btn btn-cyan" id="confirm-dep">Submit Deposit Request</button></div>
   </div>
 </div>
 
@@ -1387,6 +1512,39 @@ const SEED_TXS = [
 ];
 
 /* ── AUTH ── */
+const ADMIN_ROLE_NAMES = new Set(['admin','administrator','superadmin','super_admin','owner']);
+const ADMIN_EMAIL_ALLOWLIST = Array.isArray(window.CITADEL_ADMIN_EMAILS) ? window.CITADEL_ADMIN_EMAILS.map(v=>String(v||'').trim().toLowerCase()) : [];
+function safeStr(v){ return v == null ? '' : String(v); }
+function getProfileName(profile, fallback='Client') {
+  const first = safeStr(profile?.first_name).trim();
+  const last = safeStr(profile?.last_name).trim();
+  if (first || last) return [first,last].filter(Boolean).join(' ');
+  return safeStr(profile?.email || profile?.user_email || fallback).trim() || 'Client';
+}
+function getProfileRole(profile, user) {
+  const candidates = [profile?.role, profile?.user_role, profile?.account_role, user?.app_metadata?.role, user?.user_metadata?.role];
+  const role = candidates.find(v => safeStr(v).trim());
+  return safeStr(role || 'user').trim();
+}
+function deriveIsAdmin(user, profile) {
+  const role = getProfileRole(profile, user).toLowerCase();
+  return ADMIN_ROLE_NAMES.has(role)
+    || profile?.is_admin === true
+    || user?.app_metadata?.is_admin === true
+    || user?.user_metadata?.is_admin === true
+    || ADMIN_EMAIL_ALLOWLIST.includes(safeStr(user?.email).toLowerCase());
+}
+async function fetchProfile(userId) {
+  if (!userId) return null;
+  const { data, error } = await _sb.from('profiles').select('*').eq('id', userId).limit(1);
+  if (error) return null;
+  return data?.[0] || null;
+}
+function buildSessionUser(user, profile) {
+  const name = getProfileName(profile, user?.email || 'Client');
+  const role = getProfileRole(profile, user);
+  return { id:user?.id, name, email:user?.email, role, isAdmin:deriveIsAdmin(user, profile), profile:profile || null, isLegacy:false };
+}
 const Auth = {
   async register({ firstName, lastName, email, phone, country, type, password }) {
     const { data, error } = await _sb.auth.signUp({ email, password,
@@ -1396,6 +1554,10 @@ const Auth = {
     if (data.user) { await _sb.from('profiles').upsert({ id:data.user.id, first_name:firstName, last_name:lastName, phone:phone||'', country, investor_type:type }); }
     return { ok:true, needsConfirm:!data.session };
   },
+  async _sessionFromSupabaseUser(sbUser) {
+    const profile = await fetchProfile(sbUser?.id);
+    return buildSessionUser(sbUser, profile);
+  },
   async login(email, password) {
     const { data, error } = await _sb.auth.signInWithPassword({ email, password });
     if (error) {
@@ -1403,38 +1565,60 @@ const Auth = {
       if (msg.includes('email not confirmed') || msg.includes('not confirmed')) return { ok:false, msg:'Please confirm your email first.', needsVerify:true };
       return { ok:false, msg:error.message };
     }
-    const { data:profile } = await _sb.from('profiles').select('first_name,last_name').eq('id',data.user.id).single();
-    const name = profile ? `${profile.first_name} ${profile.last_name}` : data.user.email;
-    const user = { id:data.user.id, name, email:data.user.email, isLegacy:false };
-    this._cache(user); return { ok:true, user };
+    const user = await this._sessionFromSupabaseUser(data.user);
+    this._cache(user);
+    return { ok:true, user };
   },
   async verifyOTP(email, token) {
     if (!email) return { ok:false, msg:'No email found. Please try registering again.' };
     const { data, error } = await _sb.auth.verifyOtp({ email, token, type:'email' });
     if (error) return { ok:false, msg:error.message };
-    const uid = data.user?.id; let name = data.user?.email;
-    if (uid) { const { data:p } = await _sb.from('profiles').select('first_name,last_name').eq('id',uid).single(); if (p) name = `${p.first_name} ${p.last_name}`; }
-    const user = { id:uid, name, email:data.user?.email, isLegacy:false };
-    this._cache(user); return { ok:true, user };
+    const user = await this._sessionFromSupabaseUser(data.user);
+    this._cache(user);
+    return { ok:true, user };
   },
   async sendPasswordReset(email) {
     const { error } = await _sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + window.location.pathname });
     return error ? { ok:false, msg:error.message } : { ok:true };
   },
-  async resendOTP(email) { const { error } = await _sb.auth.resend({ type:'signup', email }); return error ? { ok:false, msg:error.message } : { ok:true }; },
-  async getSession() {
-    const cached = this._getCached(); if (cached) return cached;
-    const { data } = await _sb.auth.getSession(); if (!data?.session) return null;
-    const u = data.session.user;
-    const { data:p } = await _sb.from('profiles').select('first_name,last_name').eq('id',u.id).single();
-    const name = p ? `${p.first_name} ${p.last_name}` : u.email;
-    const user = { id:u.id, name, email:u.email, isLegacy:false };
-    this._cache(user); return user;
+  async resendOTP(email) {
+    const { error } = await _sb.auth.resend({ type:'signup', email });
+    return error ? { ok:false, msg:error.message } : { ok:true };
   },
-  async logout() { localStorage.removeItem('ql_session'); currentSession = null; await _sb.auth.signOut().catch(()=>{}); },
-  _cache(user) { currentSession = user; const p = { ...user, exp:Date.now()+4*60*60*1000 }; localStorage.setItem('ql_session', JSON.stringify(p)); },
+  async refreshSession() {
+    const { data } = await _sb.auth.getSession();
+    if (!data?.session) {
+      localStorage.removeItem('ql_session');
+      currentSession = null;
+      return null;
+    }
+    const user = await this._sessionFromSupabaseUser(data.session.user);
+    this._cache(user);
+    return user;
+  },
+  async getSession() {
+    const cached = this._getCached();
+    if (cached) return cached;
+    return await this.refreshSession();
+  },
+  async logout() {
+    localStorage.removeItem('ql_session');
+    currentSession = null;
+    await _sb.auth.signOut().catch(()=>{});
+  },
+  _cache(user) {
+    currentSession = user;
+    const payload = { ...user, exp:Date.now()+4*60*60*1000 };
+    localStorage.setItem('ql_session', JSON.stringify(payload));
+  },
   _getCached() {
-    for (const k of ['ql_session']) { try { const raw = localStorage.getItem(k); if (!raw) continue; const p = JSON.parse(raw); if (Date.now() < p.exp) { currentSession = p; return p; } localStorage.removeItem(k); } catch {} }
+    try {
+      const raw = localStorage.getItem('ql_session');
+      if (!raw) return null;
+      const payload = JSON.parse(raw);
+      if (Date.now() < payload.exp) { currentSession = payload; return payload; }
+      localStorage.removeItem('ql_session');
+    } catch {}
     return null;
   }
 };
@@ -1442,30 +1626,76 @@ const Auth = {
 const TxStore = {
   async load(userId, legacy) {
     const { data, error } = await _sb.from('transactions').select('*').eq('user_id', userId).order('date',{ascending:true}).order('created_at',{ascending:true});
-    if (error) { console.error('[QL]',error); transactions=[]; return; }
-    transactions = (data||[]).map(r=>({date:r.date,type:r.type,amount:r.amount,balance:r.balance}));
+    if (error) { console.error('[QL]', error); transactions = []; return; }
+    transactions = (data || []).map(r => ({ id:r.id, user_id:r.user_id, created_at:r.created_at, date:r.date, type:r.type, amount:r.amount, balance:r.balance }));
   },
   async add(userId, legacy, txData) {
-    transactions.push(txData);
-    const { error } = await _sb.from('transactions').insert({ user_id:userId, date:txData.date, type:txData.type, amount:txData.amount, balance:txData.balance });
-    if (error) { console.error('[QL] TX insert:',error); return { ok:false }; }
-    return { ok:true };
+    const payload = { user_id:userId, date:txData.date, type:txData.type, amount:txData.amount, balance:txData.balance };
+    const { data, error } = await _sb.from('transactions').insert(payload).select('*').single();
+    if (error) { console.error('[QL] TX insert:', error); return { ok:false, msg:error.message, error }; }
+    if (userId && currentSession?.id === userId) {
+      transactions.push({ id:data.id, user_id:data.user_id, created_at:data.created_at, date:data.date, type:data.type, amount:data.amount, balance:data.balance });
+      transactions.sort(txSortAsc);
+    }
+    return { ok:true, row:data };
+  },
+  async request(userId, { kind, amount, balance, asset='', network='' }) {
+    const type = [`${kind} Request`, 'PENDING', [asset, network].filter(Boolean).join(' ')].filter(Boolean).join(' • ');
+    const amountLabel = `${kind === 'Deposit' ? '+' : '-'}${fmt(amount)}`;
+    return await this.add(userId, false, { date:new Date().toISOString().slice(0,10), type, amount:amountLabel, balance:fmt(balance) });
+  },
+  async listAll() {
+    const { data, error } = await _sb.from('transactions').select('*').order('date',{ascending:false}).order('created_at',{ascending:false});
+    if (error) { console.error('[QL] listAll:', error); return []; }
+    return data || [];
+  },
+  async listProfiles() {
+    const { data, error } = await _sb.from('profiles').select('*').order('created_at',{ascending:false});
+    if (error) { console.error('[QL] listProfiles:', error); return []; }
+    return data || [];
+  },
+  async update(id, patch) {
+    const { data, error } = await _sb.from('transactions').update(patch).eq('id', id).select('*').single();
+    if (error) { console.error('[QL] TX update:', error); return { ok:false, msg:error.message, error }; }
+    if (currentSession?.id && data?.user_id === currentSession.id) {
+      const idx = transactions.findIndex(t => t.id === data.id);
+      const nextTx = { id:data.id, user_id:data.user_id, created_at:data.created_at, date:data.date, type:data.type, amount:data.amount, balance:data.balance };
+      if (idx >= 0) transactions[idx] = nextTx;
+      else transactions.push(nextTx);
+      transactions.sort(txSortAsc);
+    }
+    return { ok:true, row:data };
   },
   calcProfits(txList) {
     const profitTypes = ['Trading Gain','Mining Profit','Mining Payout','Staking Reward','Quantum Yield','Alpha Portfolio'];
-    return txList.reduce((sum,tx) => { if (tx.amount.startsWith('+') && profitTypes.some(t=>tx.type.includes(t))) sum += parseAmt(tx.amount); return sum; }, 0);
+    return txList.reduce((sum, tx) => {
+      if (safeStr(tx.amount).startsWith('+') && profitTypes.some(t => safeStr(tx.type).includes(t))) sum += parseAmt(tx.amount);
+      return sum;
+    }, 0);
   },
-  subscribe(userId, onNew) {
+  subscribe(userId, onChange) {
     if (!userId) return;
     if (realtimeChannel) _sb.removeChannel(realtimeChannel);
-    realtimeChannel = _sb.channel(`tx:${userId}`).on('postgres_changes',{event:'INSERT',schema:'public',table:'transactions',filter:`user_id=eq.${userId}`}, payload => {
-      const r = payload.new;
-      const tx = {date:r.date,type:r.type,amount:r.amount,balance:r.balance};
-      if (!transactions.some(t=>t.date===tx.date&&t.type===tx.type&&t.amount===tx.amount)) {
-        transactions.push(tx); transactions.sort((a,b)=>new Date(a.date)-new Date(b.date));
-        onNew(tx);
-      }
-    }).subscribe(s=>console.log('[QL] Realtime:',s));
+    realtimeChannel = _sb.channel(`tx:${userId}`)
+      .on('postgres_changes', { event:'INSERT', schema:'public', table:'transactions', filter:`user_id=eq.${userId}` }, payload => {
+        const r = payload.new;
+        const tx = { id:r.id, user_id:r.user_id, created_at:r.created_at, date:r.date, type:r.type, amount:r.amount, balance:r.balance };
+        if (!transactions.some(t => t.id === tx.id)) {
+          transactions.push(tx);
+          transactions.sort(txSortAsc);
+          onChange(tx, 'INSERT');
+        }
+      })
+      .on('postgres_changes', { event:'UPDATE', schema:'public', table:'transactions', filter:`user_id=eq.${userId}` }, payload => {
+        const r = payload.new;
+        const tx = { id:r.id, user_id:r.user_id, created_at:r.created_at, date:r.date, type:r.type, amount:r.amount, balance:r.balance };
+        const idx = transactions.findIndex(t => t.id === tx.id);
+        if (idx >= 0) transactions[idx] = tx;
+        else transactions.push(tx);
+        transactions.sort(txSortAsc);
+        onChange(tx, 'UPDATE');
+      })
+      .subscribe(s => console.log('[QL] Realtime:', s));
   }
 };
 
@@ -1479,72 +1709,415 @@ function toast(type, title, msg, dur=5200) {
 }
 
 /* ── ROUTER ── */
-function showPage(id) {
-  const target = $(id);
-  if (!target) return;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  target.classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
+let adminBindingsReady = false;
+const adminState = { profiles:[], transactions:[], users:[], selectedUserId:null };
+
+function closeMobileMenu() {
   $('navLinks')?.classList.remove('open');
   if ($('navToggle')) $('navToggle').innerHTML='<i class="fa-solid fa-bars"></i>';
-  updateNav();
-  const hmap={
-    'page-landing':'/','page-login':'/login','page-register':'/register','page-verify':'/verify',
-    'page-forgot':'/forgot','page-dashboard':'/dashboard','page-performance':'/performance',
-    'page-markets':'/markets','page-faq':'/faq','page-technology':'/technology','page-why-citadel':'/why-citadel',
-    'page-terms':'/terms','page-privacy':'/privacy','page-risk':'/risk','page-aml':'/aml'
-  };
-  if (hmap[id]!==undefined) history.replaceState(null,'','#'+hmap[id]);
-  // Init page-specific content
-  if (id==='page-performance') initPerfPage();
-  if (id==='page-markets') initMarketsPage();
-  if (id==='page-faq') initFAQPage();
 }
-
-// Helper for footer/nav links to inner pages
-function navToPage(pageId) { showPage(pageId); if(pageId==='page-landing') initLanding(); }
-
-function updateNav() {
-  const s = Auth._getCached();
-  ['nav-login-btn','nav-reg-btn'].forEach(id=>$(id)?.classList.toggle('hidden',!!s));
-  $('nav-user').classList.toggle('hidden',!s);
-  if(s){$('nav-username').textContent=s.name.split(' ')[0];$('nav-avatar').textContent=s.name[0].toUpperCase();}
-  const activePage = document.querySelector('.page.active')?.id || '';
-  document.querySelectorAll('.nav-links a[data-page]').forEach(a=>a.classList.toggle('active', a.dataset.page===activePage));
+function txSortAsc(a,b) {
+  return (new Date(a?.date || 0) - new Date(b?.date || 0)) || (new Date(a?.created_at || 0) - new Date(b?.created_at || 0));
 }
-
-async function route() {
-  const s = await Auth.getSession();
-  const h = location.hash || '#/';
-  const publicRouteMap = {
-    '#':'page-landing','#/':'page-landing',
-    '#/login':'page-login','#/register':'page-register','#/verify':'page-verify','#/forgot':'page-forgot',
-    '#/performance':'page-performance','#/markets':'page-markets','#/faq':'page-faq','#/technology':'page-technology','#/why-citadel':'page-why-citadel',
-    '#/terms':'page-terms','#/privacy':'page-privacy','#/risk':'page-risk','#/aml':'page-aml'
-  };
-
-  if (publicRouteMap[h]) {
-    showPage(publicRouteMap[h]);
-    if (publicRouteMap[h] === 'page-landing') initLanding();
+function txSortDesc(a,b) {
+  return (new Date(b?.date || 0) - new Date(a?.date || 0)) || (new Date(b?.created_at || 0) - new Date(a?.created_at || 0));
+}
+function parseRequestMeta(type='') {
+  const raw = safeStr(type);
+  const isRequest = raw.includes('Request');
+  const kind = raw.includes('Deposit Request') ? 'Deposit' : raw.includes('Withdrawal Request') ? 'Withdrawal' : '';
+  const status = raw.includes('APPROVED') ? 'APPROVED' : raw.includes('REJECTED') ? 'REJECTED' : raw.includes('PENDING') ? 'PENDING' : '';
+  const parts = raw.split('•').map(v => v.trim()).filter(Boolean);
+  const asset = parts.slice(2).join(' • ');
+  return { isRequest, kind, status, asset };
+}
+function getAdminUserBalance(userId) {
+  const rows = adminState.transactions.filter(tx => tx.user_id === userId).sort(txSortAsc);
+  return rows.length ? parseAmt(rows[rows.length - 1].balance) : 0;
+}
+function buildAdminUsers() {
+  const profileMap = new Map((adminState.profiles || []).map(profile => [profile.id, profile]));
+  const ids = new Set([
+    ...Array.from(profileMap.keys()),
+    ...adminState.transactions.map(tx => tx.user_id).filter(Boolean)
+  ]);
+  return Array.from(ids).map(id => {
+    const profile = profileMap.get(id) || {};
+    const txs = adminState.transactions.filter(tx => tx.user_id === id).sort(txSortDesc);
+    const pendingCount = txs.filter(tx => { const meta = parseRequestMeta(tx.type); return meta.isRequest && meta.status === 'PENDING'; }).length;
+    const role = getProfileRole(profile, null);
+    return {
+      id,
+      profile,
+      name: getProfileName(profile, `User ${safeStr(id).slice(0,8)}`),
+      email: safeStr(profile.email || profile.user_email || profile.contact_email || ''),
+      country: safeStr(profile.country || ''),
+      investorType: safeStr(profile.investor_type || ''),
+      role,
+      isAdmin: ADMIN_ROLE_NAMES.has(safeStr(role).toLowerCase()) || profile?.is_admin === true,
+      txs,
+      txCount: txs.length,
+      pendingCount,
+      balance: getAdminUserBalance(id)
+    };
+  }).sort((a,b) => (b.pendingCount - a.pendingCount) || (b.balance - a.balance) || a.name.localeCompare(b.name));
+}
+function renderAdminSummary() {
+  const users = adminState.users || [];
+  const pending = adminState.transactions.filter(tx => { const meta = parseRequestMeta(tx.type); return meta.isRequest && meta.status === 'PENDING'; });
+  const totalVolume = adminState.transactions.reduce((sum, tx) => sum + Math.abs(parseAmt(tx.amount)), 0);
+  const totalBalance = users.reduce((sum, user) => sum + user.balance, 0);
+  $('admin-users-count').textContent = users.length;
+  $('admin-pending-count').textContent = pending.length;
+  $('admin-ledger-volume').textContent = fmt(totalVolume);
+  $('admin-total-balance').textContent = fmt(totalBalance);
+  $('admin-pending-badge').textContent = `${pending.length} Pending`;
+}
+function renderAdminUserList() {
+  const wrap = $('admin-user-list');
+  if (!wrap) return;
+  const term = safeStr($('admin-user-search')?.value).toLowerCase().trim();
+  const users = (adminState.users || []).filter(user => {
+    if (!term) return true;
+    const haystack = [user.name, user.email, user.id, user.country, user.investorType].join(' ').toLowerCase();
+    return haystack.includes(term);
+  });
+  if (!users.length) {
+    wrap.innerHTML = '<div class="admin-empty">No users matched your search.</div>';
     return;
   }
-
-  if (h === '#/dashboard') {
-    if (s) {
+  wrap.innerHTML = users.map(user => `
+    <div class="admin-user-card ${user.id === adminState.selectedUserId ? 'active' : ''}" data-user-id="${user.id}">
+      <div class="admin-user-top">
+        <div>
+          <div class="admin-user-name">${user.name}</div>
+          <div class="admin-user-id">${user.email || user.id}</div>
+        </div>
+        <span class="badge ${user.isAdmin ? 'badge-blue' : user.pendingCount ? 'badge-amber' : 'badge-ghost'}">${user.isAdmin ? 'Admin' : user.pendingCount ? `${user.pendingCount} pending` : 'Client'}</span>
+      </div>
+      <div class="admin-user-meta"><span>Balance</span><strong>${fmt(user.balance)}</strong></div>
+      <div class="admin-user-meta"><span>Transactions</span><strong>${user.txCount}</strong></div>
+      <div class="admin-user-meta"><span>Region / Type</span><strong>${user.country || '—'}${user.investorType ? ` · ${user.investorType}` : ''}</strong></div>
+    </div>
+  `).join('');
+}
+function renderAdminSelectedUser() {
+  const target = $('admin-selected-user');
+  const txBody = $('admin-selected-user-tx-body');
+  if (!target || !txBody) return;
+  const user = (adminState.users || []).find(entry => entry.id === adminState.selectedUserId);
+  if (!user) {
+    $('admin-selected-role').className = 'badge badge-ghost';
+    $('admin-selected-role').textContent = 'User';
+    $('admin-selected-count').textContent = '0 Entries';
+    target.innerHTML = '<div class="admin-empty">Select a user to review deposits, withdrawals, and full ledger history.</div>';
+    txBody.innerHTML = '<tr><td colspan="4" class="text-center" style="padding:20px;color:var(--muted);">No user selected.</td></tr>';
+    return;
+  }
+  const lastRequest = user.txs.find(tx => parseRequestMeta(tx.type).isRequest);
+  $('admin-selected-role').className = `badge ${user.isAdmin ? 'badge-blue' : user.pendingCount ? 'badge-amber' : 'badge-ghost'}`;
+  $('admin-selected-role').textContent = user.isAdmin ? 'Admin' : user.role || 'User';
+  $('admin-selected-count').textContent = `${user.txs.length} Entries`;
+  target.innerHTML = `
+    <div class="flex-between flex-wrap gap-3">
+      <div>
+        <div class="dash-welcome" style="font-size:1.14rem;">${user.name}</div>
+        <div class="dash-sub">${user.email || user.id}${user.country ? ` · ${user.country}` : ''}${user.investorType ? ` · ${user.investorType}` : ''}</div>
+      </div>
+      <div class="admin-helper">Use the admin controls above to manually credit or debit this ledger, or approve pending requests below.</div>
+    </div>
+    <div class="admin-selected-grid">
+      <div class="admin-kpi"><div class="admin-kpi-lbl">Current Balance</div><div class="admin-kpi-val">${fmt(user.balance)}</div></div>
+      <div class="admin-kpi"><div class="admin-kpi-lbl">Pending Requests</div><div class="admin-kpi-val amber">${user.pendingCount}</div></div>
+      <div class="admin-kpi"><div class="admin-kpi-lbl">Transactions</div><div class="admin-kpi-val">${user.txCount}</div></div>
+      <div class="admin-kpi"><div class="admin-kpi-lbl">Last Request</div><div class="admin-kpi-val ${lastRequest ? 'green' : 'red'}">${lastRequest ? lastRequest.date : 'None'}</div></div>
+    </div>
+  `;
+  txBody.innerHTML = user.txs.slice(0, 14).map(txRow).join('') || '<tr><td colspan="4" class="text-center" style="padding:20px;color:var(--muted);">No transactions for this user.</td></tr>';
+}
+function renderAdminRequests() {
+  const body = $('admin-request-body');
+  if (!body) return;
+  const pending = adminState.transactions
+    .filter(tx => { const meta = parseRequestMeta(tx.type); return meta.isRequest && meta.status === 'PENDING'; })
+    .sort(txSortDesc);
+  if (!pending.length) {
+    body.innerHTML = '<tr><td colspan="6" class="text-center" style="padding:22px;color:var(--muted);">No pending deposit or withdrawal requests.</td></tr>';
+    return;
+  }
+  body.innerHTML = pending.map(tx => {
+    const meta = parseRequestMeta(tx.type);
+    const user = adminState.users.find(entry => entry.id === tx.user_id);
+    return `
+      <tr>
+        <td class="tx-date">${tx.date}</td>
+        <td>
+          <div style="font-weight:600;color:var(--text);">${user?.name || tx.user_id}</div>
+          <div class="tx-date">${user?.email || safeStr(tx.user_id).slice(0,12)}</div>
+        </td>
+        <td>
+          <span class="badge ${meta.kind === 'Deposit' ? 'badge-cyan' : 'badge-red'}">${meta.kind || 'Request'}</span>
+          <div class="tx-date" style="margin-top:4px;">${meta.asset || 'Standard ledger request'}</div>
+        </td>
+        <td class="tx-amt ${safeStr(tx.amount).startsWith('-') ? 'neg' : 'pos'}">${tx.amount}</td>
+        <td><span class="badge badge-amber">Pending</span></td>
+        <td>
+          <div class="request-actions">
+            <button class="btn btn-green btn-sm" data-admin-action="approve-request" data-request-id="${tx.id}">Approve</button>
+            <button class="btn btn-red btn-sm" data-admin-action="reject-request" data-request-id="${tx.id}">Reject</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+function renderAdminLedger() {
+  const body = $('admin-all-tx-body');
+  if (!body) return;
+  const rows = adminState.transactions.slice().sort(txSortDesc).slice(0, 24);
+  if (!rows.length) {
+    body.innerHTML = '<tr><td colspan="5" class="text-center" style="padding:22px;color:var(--muted);">No platform transactions found.</td></tr>';
+    return;
+  }
+  body.innerHTML = rows.map(tx => {
+    const user = adminState.users.find(entry => entry.id === tx.user_id);
+    return `
+      <tr>
+        <td class="tx-date">${tx.date}</td>
+        <td>
+          <div style="font-weight:600;color:var(--text);">${user?.name || tx.user_id}</div>
+          <div class="tx-date">${user?.email || safeStr(tx.user_id).slice(0,12)}</div>
+        </td>
+        <td><span class="badge ${parseRequestMeta(tx.type).status === 'PENDING' ? 'badge-amber' : 'badge-ghost'}">${tx.type}</span></td>
+        <td class="tx-amt ${safeStr(tx.amount).startsWith('-') ? 'neg' : safeStr(tx.amount).startsWith('+') ? 'pos' : 'neut'}">${tx.amount}</td>
+        <td class="tx-bal">${tx.balance}</td>
+      </tr>
+    `;
+  }).join('');
+}
+async function refreshAdminDashboard(opts = {}) {
+  const [profiles, allTransactions] = await Promise.all([TxStore.listProfiles(), TxStore.listAll()]);
+  adminState.profiles = profiles || [];
+  adminState.transactions = (allTransactions || []).sort(txSortDesc);
+  adminState.users = buildAdminUsers();
+  if (!adminState.selectedUserId || !adminState.users.some(user => user.id === adminState.selectedUserId) || opts.resetSelection) {
+    adminState.selectedUserId = adminState.users[0]?.id || null;
+  }
+  renderAdminSummary();
+  renderAdminUserList();
+  renderAdminSelectedUser();
+  renderAdminRequests();
+  renderAdminLedger();
+}
+async function initAdminDashboard(session) {
+  if (!session?.isAdmin) {
+    toast('warning', 'Access Restricted', 'Only administrators can open the admin dashboard.');
+    if (session) {
       showPage('page-dashboard');
-      await initDashboard(s);
+      await initDashboard(session);
     } else {
       showPage('page-login');
     }
     return;
   }
-
-  if (s) {
-    showPage('page-dashboard');
-    await initDashboard(s);
+  if (!adminBindingsReady) {
+    bindAdminDashboard();
+    adminBindingsReady = true;
+  }
+  await refreshAdminDashboard();
+}
+async function adminResolveRequest(requestId, action) {
+  const request = adminState.transactions.find(tx => String(tx.id) === String(requestId));
+  if (!request) { toast('error', 'Request Not Found', 'The selected request could not be found.'); return; }
+  const meta = parseRequestMeta(request.type);
+  if (!meta.isRequest || meta.status !== 'PENDING') { toast('warning', 'Already Processed', 'This request is no longer pending.'); return; }
+  const nextStatus = action === 'approve' ? 'APPROVED' : 'REJECTED';
+  const updatedType = request.type.replace('PENDING', nextStatus);
+  if (action === 'approve') {
+    const currentBalance = getAdminUserBalance(request.user_id);
+    const amountValue = Math.abs(parseAmt(request.amount));
+    const isWithdrawal = meta.kind === 'Withdrawal';
+    if (isWithdrawal && amountValue > currentBalance) {
+      toast('error', 'Approval Blocked', 'Withdrawal exceeds the current available balance.');
+      return;
+    }
+    const nextBalance = isWithdrawal ? currentBalance - amountValue : currentBalance + amountValue;
+    const liveType = `${meta.kind}${meta.asset ? ` (${meta.asset})` : ''}`;
+    const liveInsert = await _sb.from('transactions').insert({
+      user_id: request.user_id,
+      date: new Date().toISOString().slice(0,10),
+      type: liveType,
+      amount: request.amount,
+      balance: fmt(nextBalance)
+    });
+    if (liveInsert.error) {
+      toast('error', 'Approval Failed', liveInsert.error.message || 'Could not create the ledger transaction.');
+      return;
+    }
+  }
+  const updateResult = await TxStore.update(request.id, { type: updatedType });
+  if (!updateResult.ok) {
+    toast('error', 'Update Failed', updateResult.msg || 'Could not update request status.');
     return;
   }
+  await refreshAdminDashboard();
+  toast(action === 'approve' ? 'success' : 'warning', action === 'approve' ? 'Request Approved' : 'Request Rejected', `${meta.kind} request ${action === 'approve' ? 'accepted' : 'rejected'} for ${adminState.users.find(user => user.id === request.user_id)?.name || request.user_id}.`);
+}
+async function adminManualLedger(kind) {
+  const selectedUser = adminState.users.find(user => user.id === adminState.selectedUserId);
+  if (!selectedUser) { toast('warning', 'Select a User', 'Choose a user first from the directory.'); return; }
+  const amountRaw = prompt(`${kind === 'credit' ? 'Manual credit' : 'Manual debit'} for ${selectedUser.name}\n\nEnter amount:`, '1000.00');
+  if (amountRaw === null) return;
+  const amountValue = parseFloat(amountRaw);
+  if (!amountValue || amountValue <= 0) { toast('error', 'Invalid Amount', 'Enter a valid amount greater than zero.'); return; }
+  const label = prompt('Optional ledger label:', kind === 'credit' ? 'Admin Credit' : 'Admin Debit');
+  const currentBalance = getAdminUserBalance(selectedUser.id);
+  const nextBalance = kind === 'credit' ? currentBalance + amountValue : currentBalance - amountValue;
+  if (nextBalance < 0) { toast('error', 'Insufficient Balance', 'This debit would make the account balance negative.'); return; }
+  const type = `${kind === 'credit' ? 'Admin Credit' : 'Admin Debit'}${safeStr(label).trim() ? ` • ${safeStr(label).trim()}` : ''}`;
+  const amount = `${kind === 'credit' ? '+' : '-'}${fmt(amountValue)}`;
+  const { error } = await _sb.from('transactions').insert({
+    user_id: selectedUser.id,
+    date: new Date().toISOString().slice(0,10),
+    type,
+    amount,
+    balance: fmt(nextBalance)
+  });
+  if (error) {
+    toast('error', 'Ledger Update Failed', error.message || 'Could not save the manual adjustment.');
+    return;
+  }
+  await refreshAdminDashboard();
+  toast(kind === 'credit' ? 'success' : 'warning', kind === 'credit' ? 'Manual Credit Added' : 'Manual Debit Added', `${amount} recorded for ${selectedUser.name}.`);
+}
+function bindAdminDashboard() {
+  $('admin-refresh-btn')?.addEventListener('click', () => refreshAdminDashboard());
+  $('admin-manual-credit-btn')?.addEventListener('click', () => adminManualLedger('credit'));
+  $('admin-manual-debit-btn')?.addEventListener('click', () => adminManualLedger('debit'));
+  $('admin-user-search')?.addEventListener('input', renderAdminUserList);
+  $('admin-user-list')?.addEventListener('click', e => {
+    const card = e.target.closest('.admin-user-card');
+    if (!card) return;
+    adminState.selectedUserId = card.dataset.userId;
+    renderAdminUserList();
+    renderAdminSelectedUser();
+  });
+  $('admin-request-body')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-admin-action]');
+    if (!btn) return;
+    adminResolveRequest(btn.dataset.requestId, btn.dataset.adminAction === 'approve-request' ? 'approve' : 'reject');
+  });
+}
 
+function showPage(id) {
+  const session = Auth._getCached();
+  if (id === 'page-admin' && !session?.isAdmin) id = session ? 'page-dashboard' : 'page-login';
+  const target = $(id);
+  if (!target) return;
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  target.classList.add('active');
+  window.scrollTo({ top:0, behavior:'instant' });
+  closeMobileMenu();
+  updateNav();
+  const hmap = {
+    'page-landing':'/',
+    'page-login':'/login',
+    'page-register':'/register',
+    'page-verify':'/verify',
+    'page-forgot':'/forgot',
+    'page-dashboard':'/dashboard',
+    'page-admin':'/admin',
+    'page-performance':'/performance',
+    'page-markets':'/markets',
+    'page-faq':'/faq',
+    'page-technology':'/technology',
+    'page-why-citadel':'/why-citadel',
+    'page-terms':'/terms',
+    'page-privacy':'/privacy',
+    'page-risk':'/risk',
+    'page-aml':'/aml'
+  };
+  if (hmap[id] !== undefined) history.replaceState(null, '', '#' + hmap[id]);
+  if (id === 'page-performance') initPerfPage();
+  if (id === 'page-markets') initMarketsPage();
+  if (id === 'page-faq') initFAQPage();
+}
+function navToPage(pageId) {
+  showPage(pageId);
+  if (pageId === 'page-landing') initLanding();
+}
+function updateNav() {
+  const session = Auth._getCached();
+  const loggedIn = !!session;
+  const isAdmin = !!session?.isAdmin;
+  ['nav-login-btn','nav-reg-btn'].forEach(id => $(id)?.classList.toggle('hidden', loggedIn));
+  $('nav-dashboard-btn')?.classList.toggle('hidden', !loggedIn);
+  $('nav-admin-btn')?.classList.toggle('hidden', !isAdmin);
+  $('nav-user')?.classList.toggle('hidden', !loggedIn);
+  $('mob-login-item')?.classList.toggle('hidden', loggedIn);
+  $('mob-register-item')?.classList.toggle('hidden', loggedIn);
+  $('mob-dashboard-item')?.classList.toggle('hidden', !loggedIn);
+  $('mob-admin-item')?.classList.toggle('hidden', !isAdmin);
+  $('mob-logout-item')?.classList.toggle('hidden', !loggedIn);
+  if (loggedIn) {
+    $('nav-username').textContent = isAdmin ? `${session.name.split(' ')[0]} · Admin` : session.name.split(' ')[0];
+    $('nav-avatar').textContent = session.name[0]?.toUpperCase() || 'Q';
+  }
+  const activePage = document.querySelector('.page.active')?.id || '';
+  document.querySelectorAll('.nav-links a[data-page]').forEach(link => link.classList.toggle('active', link.dataset.page === activePage));
+}
+async function route() {
+  const session = await Auth.refreshSession() || Auth._getCached();
+  const hash = location.hash || '#/';
+  const publicRouteMap = {
+    '#':'page-landing',
+    '#/':'page-landing',
+    '#/login':'page-login',
+    '#/register':'page-register',
+    '#/verify':'page-verify',
+    '#/forgot':'page-forgot',
+    '#/performance':'page-performance',
+    '#/markets':'page-markets',
+    '#/faq':'page-faq',
+    '#/technology':'page-technology',
+    '#/why-citadel':'page-why-citadel',
+    '#/terms':'page-terms',
+    '#/privacy':'page-privacy',
+    '#/risk':'page-risk',
+    '#/aml':'page-aml'
+  };
+  if (publicRouteMap[hash]) {
+    showPage(publicRouteMap[hash]);
+    if (publicRouteMap[hash] === 'page-landing') initLanding();
+    return;
+  }
+  if (hash === '#/dashboard') {
+    if (session) {
+      showPage('page-dashboard');
+      await initDashboard(session);
+    } else {
+      showPage('page-login');
+    }
+    return;
+  }
+  if (hash === '#/admin') {
+    if (session?.isAdmin) {
+      showPage('page-admin');
+      await initAdminDashboard(session);
+    } else if (session) {
+      showPage('page-dashboard');
+      await initDashboard(session);
+      toast('warning', 'Access Restricted', 'Only administrators can open the admin dashboard.');
+    } else {
+      showPage('page-login');
+    }
+    return;
+  }
+  if (session) {
+    showPage('page-dashboard');
+    await initDashboard(session);
+    return;
+  }
   showPage('page-landing');
   initLanding();
 }
@@ -1588,7 +2161,7 @@ const FAQ_DATA = [
   {cat:'Staking',q:'What are staking pools and how do I earn?',a:'Staking pools allocate your capital to DeFi protocols (Ethereum Beacon Chain, Solana, BNB Chain) where it earns validator rewards. Yields are automatically compounded and reflected as Staking Reward transactions in your history.'},
   {cat:'Trading',q:'How does algorithmic trading work?',a:'Our AI-driven HFT engine executes thousands of trades per second across 185+ markets. Strategies include arbitrage, momentum, and mean-reversion. Trading gains and losses are recorded in real time on your ledger.'},
   {cat:'Account',q:'What is the minimum investment?',a:'The minimum deposit is $100 USD, payable in BTC, ETH, or USDT. Higher-tier accounts unlock additional yield strategies and priority support.'},
-  {cat:'Account',q:'How do withdrawals work?',a:'Withdrawals require administrator authorization to protect against unauthorized transfers. Contact your dedicated WhatsApp administrator at +1 (510) 912-4846. Most requests are processed within minutes, 24/7.'},
+  {cat:'Account',q:'How do withdrawals work?',a:'Withdrawals are submitted from the client dashboard and routed to the protected admin dashboard for review. An administrator approves the request before funds are released and the ledger balance is updated.'},
   {cat:'Technical',q:'How does email verification work in production?',a:'Supabase sends a real 6-digit OTP to your email on registration. Enter this code on the verify page — or click the confirmation link in the email. Sessions are secured with Supabase JWT and expire after 4 hours.'},
   {cat:'Technical',q:'Are profits and transactions automated?',a:'Yes. Mining profits, staking rewards, and trading gains are injected directly into your account via Supabase Realtime. When our trading desk records a transaction, it appears instantly on your dashboard without any page refresh.'},
   {cat:'Security',q:'How is my data and capital protected?',a:'We use AES-256 encryption, hardware security modules, biometric 2FA, and cold storage custody. Assets are insured up to $250M through Lloyd\'s of London. The platform is SOC 2 Type II certified.'},
@@ -1826,9 +2399,10 @@ async function initDashboard(session) {
   $('dash-name').textContent=session.name.split(' ')[0];
   $('m-balance').textContent='—'; $('m-txcount').textContent='…';
   await TxStore.load(session.id, isLegacy());
-  TxStore.subscribe(session.id, newTx=>{
+  TxStore.subscribe(session.id, (newTx, eventType='INSERT')=>{
     renderMetrics(); renderAllTxTables(); buildDashChart();
-    toast('info','New Transaction',`${newTx.type}: ${newTx.amount}`);
+    if(eventType==='INSERT') toast('info','New Transaction',`${newTx.type}: ${newTx.amount}`);
+    if(eventType==='UPDATE' && parseRequestMeta(newTx.type).isRequest) toast('info','Request Updated',`${newTx.type}`);
   });
   renderMetrics(); renderAllTxTables(); buildDashChart();
   initMining(); initStaking(); initTrading(); updateTradeUI();
@@ -1852,16 +2426,24 @@ function renderMetrics() {
 /* ═══════════════════════════════════════════════════
    TX TABLES
 ═══════════════════════════════════════════════════ */
-const TX_COLORS={'Trading Gain':['badge-green','pos'],'Mining Profit':['badge-blue','pos'],'Mining Payout':['badge-blue','pos'],'Staking Reward':['badge-blue','pos'],'Initial Deposit':['badge-ghost','neut'],'Deposit':['badge-ghost','neut'],'Trading Loss':['badge-red','neg'],'Hedge Fund Fee':['badge-red','neg'],'Withdrawal':['badge-red','neg'],'Quantum Yield':['badge-amber','pos'],'Alpha Portfolio':['badge-amber','pos']};
+const TX_COLORS={'Trading Gain':['badge-green','pos'],'Mining Profit':['badge-blue','pos'],'Mining Payout':['badge-blue','pos'],'Staking Reward':['badge-blue','pos'],'Initial Deposit':['badge-ghost','neut'],'Deposit':['badge-ghost','neut'],'Trading Loss':['badge-red','neg'],'Hedge Fund Fee':['badge-red','neg'],'Withdrawal':['badge-red','neg'],'Quantum Yield':['badge-amber','pos'],'Alpha Portfolio':['badge-amber','pos'],'Admin Credit':['badge-cyan','pos'],'Admin Debit':['badge-red','neg']};
 function txRow(tx){
-  const pos=tx.amount.startsWith('+'),neg=tx.amount.startsWith('-');
-  const key=Object.keys(TX_COLORS).find(k=>tx.type.includes(k))||'Initial Deposit';
-  const[bc,ac]=TX_COLORS[key]||['badge-ghost','neut'];
-  return`<tr><td class="tx-date">${tx.date}</td><td><span class="badge ${bc}" style="font-size:.54rem;">${tx.type}</span></td><td class="tx-amt ${ac}">${tx.amount}</td><td class="tx-bal">${tx.balance}</td></tr>`;
+  const requestMeta = parseRequestMeta(tx.type);
+  let badgeClass = 'badge-ghost';
+  let amountClass = safeStr(tx.amount).startsWith('-') ? 'neg' : safeStr(tx.amount).startsWith('+') ? 'pos' : 'neut';
+  if (requestMeta.isRequest) {
+    badgeClass = requestMeta.status === 'APPROVED' ? 'badge-green' : requestMeta.status === 'REJECTED' ? 'badge-red' : 'badge-amber';
+    if (requestMeta.kind === 'Withdrawal') amountClass = requestMeta.status === 'REJECTED' ? 'neg' : 'neut';
+    if (requestMeta.kind === 'Deposit') amountClass = requestMeta.status === 'REJECTED' ? 'neg' : 'pos';
+  } else {
+    const key = Object.keys(TX_COLORS).find(k => safeStr(tx.type).includes(k)) || 'Initial Deposit';
+    [badgeClass, amountClass] = TX_COLORS[key] || ['badge-ghost','neut'];
+  }
+  return`<tr><td class="tx-date">${tx.date}</td><td><span class="badge ${badgeClass}" style="font-size:.54rem;">${tx.type}</span></td><td class="tx-amt ${amountClass}">${tx.amount}</td><td class="tx-bal">${tx.balance}</td></tr>`;
 }
 
 function renderAllTxTables() {
-  const sorted=[...transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const sorted=[...transactions].sort(txSortDesc);
   // Recent (overview — last 5)
   const rt=$('recent-tx-body'); if(rt) rt.innerHTML=sorted.slice(0,5).map(txRow).join('');
   // Full paginated
@@ -1877,7 +2459,7 @@ function renderAllTxTables() {
 
 function renderPaginatedTx(page) {
   currentPage=page;
-  const sorted=[...transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const sorted=[...transactions].sort(txSortDesc);
   const pages=Math.ceil(sorted.length/ITEMS_PER_PAGE);
   const tb=$('tx-tbody'); if(tb) tb.innerHTML=sorted.slice((page-1)*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE).map(txRow).join('');
   renderPagination(page,pages);
@@ -1901,7 +2483,7 @@ function renderPagination(cur,total) {
 function buildDashChart() {
   const canvas=$('dash-chart'); if(!canvas) return;
   if(dashChartInstance) dashChartInstance.destroy();
-  const sorted=[...transactions].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const sorted=[...transactions].sort(txSortAsc);
   const slice=sorted.slice(Math.max(0,sorted.length-20));
   const ctx=canvas.getContext('2d');
   const g=ctx.createLinearGradient(0,0,0,260); g.addColorStop(0,'rgba(0,68,238,.28)'); g.addColorStop(1,'rgba(0,68,238,0)');
@@ -2233,44 +2815,51 @@ function buildRateTable() {
 }
 
 $('confirm-dep').addEventListener('click', async()=>{
-  const cur=document.querySelector('input[name="depCur"]:checked')?.value;
-  const amt=parseFloat($('dep-amount').value);
-  const net=document.querySelector('input[name="usdtNet"]:checked')?.value;
+  const cur = document.querySelector('input[name="depCur"]:checked')?.value;
+  const amt = parseFloat($('dep-amount').value);
+  const net = document.querySelector('input[name="usdtNet"]:checked')?.value;
   $('dep-alert').classList.remove('show');
   if(!cur){$('dep-alert-msg').textContent='Select a currency.';$('dep-alert').classList.add('show');return;}
   if(cur==='USDT'&&!net){$('dep-alert-msg').textContent='Select USDT network.';$('dep-alert').classList.add('show');return;}
   if(!amt||amt<100){$('dep-alert-msg').textContent='Minimum deposit is $100.00.';$('dep-alert').classList.add('show');return;}
-  const btn=$('confirm-dep'); btn.innerHTML='<div class="spinner"></div> Confirming…'; btn.disabled=true;
-  await delay(1300);
-  const newBal=getBalance()+amt;
-  const txData={date:new Date().toISOString().slice(0,10),type:`Deposit (${cur}${net?' '+net:''})`,amount:'+'+fmt(amt),balance:fmt(newBal)};
-  await TxStore.add(currentSession?.id,isLegacy(),txData);
+  const btn=$('confirm-dep'); btn.innerHTML='<div class="spinner"></div> Submitting…'; btn.disabled=true;
+  const res = await TxStore.request(currentSession?.id, { kind:'Deposit', amount:amt, balance:getBalance(), asset:cur, network:net || '' });
+  btn.innerHTML='Submit Deposit Request'; btn.disabled=false;
+  if(!res.ok){$('dep-alert-msg').textContent=res.msg || 'Could not submit deposit request.';$('dep-alert').classList.add('show');return;}
   renderMetrics(); renderAllTxTables(); buildDashChart();
-  btn.innerHTML='Confirm Deposit'; btn.disabled=false;
   $('deposit-modal').classList.remove('open');
   $('deposit-form').reset(); $('usdt-networks').style.display='none';
-  toast('success','Deposit Confirmed',`${fmt(amt)} via ${cur}${net?' ('+net+')':''} credited.`+(isLegacy()?'':' Saved to Supabase.'));
+  toast('info','Deposit Request Submitted',`${fmt(amt)} via ${cur}${net?' ('+net+')':''} is awaiting admin approval.`);
 });
 
 /* ═══════════════════════════════════════════════════
    WITHDRAWAL
 ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   WITHDRAWAL
+═══════════════════════════════════════════════════ */
 $('withdraw-btn').addEventListener('click', async()=>{
-  const bal=getBalance();
-  const input=prompt(`Current Balance: ${fmt(bal)}\n\nEnter withdrawal amount:`,'5000.00');
+  const bal = getBalance();
+  const input = prompt(`Available Balance: ${fmt(bal)}\n\nEnter withdrawal amount to submit for admin approval:`, '5000.00');
   if(input===null){toast('info','Cancelled','Withdrawal request cancelled.');return;}
-  const amt=parseFloat(input);
+  const amt = parseFloat(input);
   if(isNaN(amt)||amt<=0){toast('error','Invalid Amount','Please enter a valid amount.');return;}
   if(amt>bal){toast('error','Insufficient Funds','Amount exceeds your balance.');return;}
   const btn=$('withdraw-btn'); btn.style.opacity='.6'; btn.style.pointerEvents='none';
-  await delay(1800); btn.style.opacity=''; btn.style.pointerEvents='';
+  const res = await TxStore.request(currentSession?.id, { kind:'Withdrawal', amount:amt, balance:bal, asset:'USD' });
+  btn.style.opacity=''; btn.style.pointerEvents='';
+  if(!res.ok){toast('error','Request Failed',res.msg || 'Could not submit the withdrawal request.');return;}
+  renderMetrics(); renderAllTxTables(); buildDashChart();
   $('withdrawal-modal').classList.add('open');
+  toast('warning','Withdrawal Request Submitted',`${fmt(amt)} is awaiting admin approval.`);
 });
 $('close-w-modal').addEventListener('click',()=>$('withdrawal-modal').classList.remove('open'));
 $('cancel-w-modal').addEventListener('click',()=>$('withdrawal-modal').classList.remove('open'));
 $('withdrawal-modal').addEventListener('click',e=>{if(e.target===$('withdrawal-modal'))$('withdrawal-modal').classList.remove('open');});
-$('wa-btn').addEventListener('click',()=>{setTimeout(()=>$('withdrawal-modal').classList.remove('open'),400);toast('info','Opening WhatsApp','Connecting you with your account administrator…');});
 
+/* ═══════════════════════════════════════════════════
+   DASHBOARD TABS
+═══════════════════════════════════════════════════ */
 /* ═══════════════════════════════════════════════════
    DASHBOARD TABS
 ═══════════════════════════════════════════════════ */
@@ -2305,7 +2894,16 @@ document.querySelectorAll('.nav-links a[data-page]').forEach(a=>{
 ═══════════════════════════════════════════════════ */
 $('nav-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('nav-reg-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
+$('nav-dashboard-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('nav-admin-btn')?.addEventListener('click', async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
 $('nav-brand').addEventListener('click',e=>{e.preventDefault();showPage('page-landing');initLanding();});
+$('nav-user')?.addEventListener('click', async e=>{
+  if(e.target.closest('#nav-logout-btn')) return;
+  const s = await Auth.getSession();
+  if(!s) return;
+  if(s.isAdmin){showPage('page-admin');await initAdminDashboard(s);}
+  else {showPage('page-dashboard');await initDashboard(s);}
+});
 $('hero-start-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
 $('hero-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('adv-start-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
@@ -2324,21 +2922,37 @@ $('f-login')?.addEventListener('click',()=>showPage('page-login'));
 $('f-register')?.addEventListener('click',()=>showPage('page-register'));
 $('f-verify')?.addEventListener('click',()=>showPage('page-verify'));
 $('f-dashboard')?.addEventListener('click',async()=>{const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
-
+$('mob-login-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
+$('mob-register-link')?.addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
+$('mob-dashboard-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('mob-admin-link')?.addEventListener('click',async e=>{e.preventDefault();const s=await Auth.getSession();if(s?.isAdmin){showPage('page-admin');await initAdminDashboard(s);}else if(s){toast('warning','Access Restricted','Only administrators can open the admin dashboard.');showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
+$('mob-logout-link')?.addEventListener('click', async e=>{e.preventDefault();$('nav-logout-btn').click();});
 // Logout
-$('nav-logout-btn').addEventListener('click', async()=>{
+$('nav-logout-btn').addEventListener('click', async e=>{
+  e.stopPropagation();
   if(realtimeChannel&&_sb)_sb.removeChannel(realtimeChannel);
   if(miningInterval)clearInterval(miningInterval);
   if(orderBookInterval)clearInterval(orderBookInterval);
   await Auth.logout();
   transactions=[]; currentSession=null; stakingData={};
+  adminState.profiles=[]; adminState.transactions=[]; adminState.users=[]; adminState.selectedUserId=null;
   showPage('page-landing'); initLanding();
   toast('info','Signed Out','You have been securely signed out.');
 });
 
 // Mobile nav
-$('navToggle').addEventListener('click',()=>{const nl=$('navLinks');nl.classList.toggle('open');$('navToggle').innerHTML=nl.classList.contains('open')?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>';});
-window.addEventListener('resize',()=>{if(window.innerWidth>768)$('navLinks').classList.remove('open');});
+$('navToggle').addEventListener('click',e=>{
+  e.stopPropagation();
+  const nl=$('navLinks');
+  nl.classList.toggle('open');
+  $('navToggle').innerHTML=nl.classList.contains('open')?'<i class="fa-solid fa-xmark"></i>':'<i class="fa-solid fa-bars"></i>';
+});
+document.addEventListener('click',e=>{
+  if(!$('navLinks')?.classList.contains('open')) return;
+  if(e.target.closest('#navLinks') || e.target.closest('#navToggle')) return;
+  closeMobileMenu();
+});
+window.addEventListener('resize',()=>{if(window.innerWidth>768)closeMobileMenu();});
 window.addEventListener('scroll',()=>$('navbar').classList.toggle('scrolled',scrollY>40),{passive:true});
 $('deposit-modal').addEventListener('click',e=>{if(e.target===$('deposit-modal'))$('deposit-modal').classList.remove('open');});
 
