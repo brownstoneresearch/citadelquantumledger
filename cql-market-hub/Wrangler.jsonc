@@ -1,0 +1,18 @@
+{
+  "name": "cql-market-hub",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-02-28",
+
+  "durable_objects": {
+    "bindings": [
+      { "name": "MARKET_HUB", "class_name": "MarketHub" }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["MarketHub"]
+    }
+  ]
+}
