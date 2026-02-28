@@ -2774,7 +2774,7 @@ const MarketHub = {
   },
   config() {
     return Object.assign({
-      snapshotUrl:'/api/markets/snapshot',
+      snapshotUrl:'https://citadelquantumledger.brownstonetberesearch.workers.dev/api/markets/snapshot',
       websocketUrl:'',
       refreshMs:15000,
       demoIntervalMs:4000,
@@ -3206,7 +3206,7 @@ const MarketHub = {
   }
 };
 
-window.CITADEL_MARKETS_CONFIG = Object.assign({ snapshotUrl:'/api/markets/snapshot', websocketUrl:'', refreshMs:15000, demoIntervalMs:4000, reconnectMs:5000 }, window.CITADEL_MARKETS_CONFIG || {});
+window.CITADEL_MARKETS_CONFIG = Object.assign({ snapshotUrl:'https://citadelquantumledger.brownstonetberesearch.workers.dev/api/markets/snapshot', websocketUrl:'', refreshMs:15000, demoIntervalMs:4000, reconnectMs:5000 }, window.CITADEL_MARKETS_CONFIG || {});
 
 const FAQ_DATA = [
   {cat:'Platform',q:'What is Citadel Quantum Ledger?',a:'Citadel Quantum Ledger is an institutional-grade investment platform combining DeFi asset management, high-frequency trading, and mining/staking operations. It uses a private Quantum Ledger for immutable, auditable transaction records.'},
