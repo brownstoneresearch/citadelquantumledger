@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "citadelquantumledger-markets-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-02-28",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "ALLOWED_ORIGIN": "https://citadelquantumledger.pages.dev",
+    "DEMO_MODE": "false",
+    "IG_BASE_URL": "https://demo-api.ig.com/gateway/deal",
+    "OANDA_BASE_URL": "https://api-fxpractice.oanda.com",
+    "ENABLE_OANDA_FALLBACK": "true",
+    "IG_ALLOW_RUNTIME_SEARCH": "false"
+  }
+}
