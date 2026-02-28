@@ -411,36 +411,6 @@ select.form-control option{background:var(--mid);color:var(--text);}
 .legal-doc p{margin-bottom:20px;}
 .faq-cat-btn{width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:var(--r-sm);font-family:var(--font-m);font-size:.62rem;letter-spacing:.10em;text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:var(--faint);transition:.2s;text-align:left;}
 .faq-cat-btn:hover,.faq-cat-btn.active{background:var(--blue-mist);color:var(--cyan);}
-.nav-user{cursor:pointer;transition:border-color var(--dur),background var(--dur),color var(--dur),transform var(--dur);}
-.nav-user:hover{border-color:rgba(0,201,240,.35);background:rgba(0,201,240,.07);color:var(--text-2);transform:translateY(-1px);}
-.nav-avatar img,.profile-avatar-frame img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
-.dashboard-return-pill{display:flex;align-items:center;gap:10px;padding:12px 15px;margin-bottom:20px;border-radius:var(--r-md);background:rgba(0,201,240,.06);border:1px solid rgba(0,201,240,.16);font-size:.82rem;color:var(--text-2);line-height:1.65;}
-.dashboard-return-pill i{color:var(--cyan);flex:0 0 auto;}
-.profile-layout{display:grid;grid-template-columns:320px 1fr;gap:18px;margin-bottom:20px;align-items:start;}
-.profile-avatar-shell{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;}
-.profile-avatar-frame{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));border:1px solid rgba(0,68,238,.32);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--void);box-shadow:0 0 0 1px rgba(255,255,255,.04),0 16px 40px rgba(0,0,0,.42);overflow:hidden;}
-.avatar-edit-btn{position:absolute;right:calc(50% - 58px);top:82px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#002EBB,var(--blue-lt));border:1px solid rgba(34,102,255,.55);color:#fff;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.36);transition:transform var(--dur) var(--ease),box-shadow var(--dur);}
-.avatar-edit-btn:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 16px 32px rgba(0,0,0,.46);}
-.profile-name-large{margin-top:18px;font-family:var(--font-d);font-size:1.18rem;font-weight:700;color:var(--text);}
-.profile-meta-list{display:flex;flex-direction:column;gap:10px;}
-.profile-meta-item{padding:12px 14px;background:rgba(4,6,9,.60);border:1px solid var(--stroke2);border-radius:var(--r-md);}
-.profile-meta-item span{display:block;font-family:var(--font-m);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;}
-.profile-meta-item strong,.profile-bio-copy{display:block;font-size:.82rem;color:var(--text-2);line-height:1.72;font-weight:500;word-break:break-word;}
-.profile-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.profile-note{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:rgba(17,22,40,.76);border:1px solid var(--stroke2);border-radius:var(--r-md);font-size:.78rem;color:var(--muted);line-height:1.7;}
-.profile-note i{margin-top:2px;color:var(--cyan);}
-textarea.form-control{min-height:124px;resize:vertical;}
-.admin-layout{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
-.admin-panel-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start;}
-.admin-action-list,.admin-log-list{display:flex;flex-direction:column;gap:10px;}
-.admin-log-item{padding:13px 15px;background:rgba(4,6,9,.60);border:1px solid var(--stroke2);border-radius:var(--r-md);}
-.admin-log-item strong{display:block;font-size:.82rem;color:var(--text);margin-bottom:4px;}
-.admin-log-item span{font-size:.76rem;color:var(--muted);line-height:1.7;}
-.admin-mini-stat{padding:14px;background:rgba(4,6,9,.60);border:1px solid var(--stroke2);border-radius:var(--r-md);}
-.admin-mini-stat .lbl{font-family:var(--font-m);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;}
-.admin-mini-stat .val{font-family:var(--font-d);font-size:1.02rem;font-weight:700;color:var(--cyan);}
-.admin-quick-nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;}
-
 @media(max-width:1100px){
   .hero{grid-template-columns:1fr;padding:48px 0 64px;}
   .hero-right{display:none;}
@@ -451,8 +421,6 @@ textarea.form-control{min-height:124px;resize:vertical;}
   .trading-layout{grid-template-columns:1fr;}
   .stats-grid{grid-template-columns:1fr 1fr;}
   .adv-list{grid-template-columns:1fr;}
-  .profile-layout,.admin-panel-grid{grid-template-columns:1fr;}
-  .admin-layout{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
   .nav-links{display:none;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(2,3,7,.99);border-bottom:1px solid var(--stroke2);padding:10px;gap:2px;z-index:999;}
@@ -465,9 +433,6 @@ textarea.form-control{min-height:124px;resize:vertical;}
   .stake-pools-grid{grid-template-columns:1fr;}
   .markets-grid{grid-template-columns:1fr;}
   .ops-grid{grid-template-columns:1fr;}
-  .profile-form-grid{grid-template-columns:1fr;}
-  .admin-layout{grid-template-columns:1fr;}
-  .admin-quick-nav{justify-content:flex-start;}
   .auth-card,.auth-card.wide{padding:26px 20px;}
   .adv-card{padding:30px 22px;}
   .form-row{grid-template-columns:1fr;}
@@ -493,23 +458,19 @@ textarea.form-control{min-height:124px;resize:vertical;}
   <div class="container nav-inner">
     <div class="nav-brand" id="nav-brand"><img src="https://www.ir-impact.com/wp-content/uploads/2024/11/Logo_Citadel-1024x499.png" alt="Citadel"/><span class="brand-text">Quantum Ledger</span></div>
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a id="nl-home" data-sec="hero">Home</a></li>
       <li><a id="nl-features" data-sec="sec-features">Technology</a></li>
       <li><a id="nl-performance" data-sec="sec-performance">Performance</a></li>
       <li><a id="nl-markets" data-sec="sec-markets">Markets</a></li>
       <li><a id="nl-advantage" data-sec="sec-advantage">Why Citadel</a></li>
-      <li><a id="nl-faq" data-sec="sec-faq">FAQ</a></li>
     </ul>
     <div class="nav-right">
       <a href="#" class="btn btn-outline btn-sm hidden" id="nav-login-btn">Login</a>
       <a href="#" class="btn btn-cyan btn-sm hidden" id="nav-reg-btn">Open Account</a>
-      <a href="#" class="btn btn-outline btn-sm hidden" id="nav-dashboard-btn"><i class="fa-solid fa-table-columns"></i>Dashboard</a>
-      <a href="#" class="btn btn-ghost btn-sm hidden" id="nav-admin-btn"><i class="fa-solid fa-user-shield"></i>Admin</a>
-      <div class="nav-user hidden" id="nav-user" title="Open profile editor">
+      <div class="nav-user hidden" id="nav-user">
         <div class="nav-avatar" id="nav-avatar">Q</div>
         <span id="nav-username">Client</span>
+        <button class="btn btn-ghost btn-sm" id="nav-logout-btn" style="padding:5px 9px;"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
       </div>
-      <button class="btn btn-ghost btn-sm hidden" id="nav-logout-btn" style="padding:7px 11px;"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
   </div>
@@ -662,49 +623,6 @@ textarea.form-control{min-height:124px;resize:vertical;}
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <img src="https://www.ir-impact.com/wp-content/uploads/2024/11/Logo_Citadel-1024x499.png" alt="Citadel" class="footer-brand-img"/>
-          <p class="footer-about">Institutional-grade decentralized asset management. Powered by Quantum Ledger technology and proprietary algorithmic intelligence.</p>
-          <div class="flex gap-2 mt-3">
-            <a class="btn btn-ghost btn-sm" style="width:32px;height:32px;padding:0;border-radius:var(--r-sm);" href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a class="btn btn-ghost btn-sm" style="width:32px;height:32px;padding:0;border-radius:var(--r-sm);" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a class="btn btn-ghost btn-sm" style="width:32px;height:32px;padding:0;border-radius:var(--r-sm);" href="#"><i class="fa-brands fa-telegram"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h5>Platform</h5><ul>
-          <li><a onclick="navToPage('page-technology')">Technology</a></li>
-          <li><a onclick="navToPage('page-performance')">Performance</a></li>
-          <li><a onclick="navToPage('page-markets')">Markets</a></li>
-          <li><a onclick="navToPage('page-faq')">FAQ</a></li>
-        </ul></div>
-        <div class="footer-col"><h5>Account</h5><ul>
-          <li><a id="f-login">Client Login</a></li>
-          <li><a id="f-register">Open Account</a></li>
-          <li><a id="f-verify">Verify Account</a></li>
-          <li><a id="f-dashboard">Dashboard</a></li>
-          <li><a id="f-admin">Admin Dashboard</a></li>
-        </ul></div>
-        <div class="footer-col"><h5>Legal</h5><ul>
-          <li><a onclick="navToPage('page-terms')">Terms of Service</a></li>
-          <li><a onclick="navToPage('page-privacy')">Privacy Policy</a></li>
-          <li><a onclick="navToPage('page-risk')">Risk Disclosure</a></li>
-          <li><a onclick="navToPage('page-aml')">AML Policy</a></li>
-        </ul></div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-copy"><strong>© 2025 Citadel Financials</strong> · Quantum Ledger v7.0</p>
-        <div class="footer-legal">
-          <a onclick="navToPage('page-privacy')">Privacy</a>
-          <a onclick="navToPage('page-terms')">Terms</a>
-          <a href="#">Cookies</a>
-        </div>
-      </div>
-      <p class="footer-disclaimer">Investments involve significant risk. Past performance is not indicative of future results. For qualified investors only. Not available in all jurisdictions.</p>
-    </div>
-  </footer>
 </div><!-- /page-landing -->
 
 <!-- ══════════════════════════
@@ -1104,19 +1022,24 @@ textarea.form-control{min-height:124px;resize:vertical;}
           </div>
         </div>
       </div>
-      <div class="dashboard-return-pill"><i class="fa-solid fa-table-columns"></i><span>While logged in, click <strong>Dashboard</strong> in the top-right navigation any time to return to this dashboard UI.</span></div>
       <div class="metrics-row">
         <div class="met-card"><div class="met-lbl">Total Balance</div><div class="met-val" id="m-balance">$0.00</div><div class="met-desc">Across all positions</div></div>
         <div class="met-card"><div class="met-lbl">Lifetime Profits</div><div class="met-val green" id="m-profits">$0.00</div><div class="met-desc" id="m-profits-desc">Net realized gains</div></div>
         <div class="met-card"><div class="met-lbl">Active Operations</div><div class="met-val amber">3</div><div class="met-desc">Mining · Staking · Trading</div></div>
         <div class="met-card"><div class="met-lbl">Total Transactions</div><div class="met-val" id="m-txcount">—</div><div class="met-desc">Account history</div></div>
       </div>
+      <div class="milestone" id="milestone-banner" style="display:none;">
+        <div class="flex gap-3">
+          <div style="width:46px;height:46px;border-radius:50%;background:rgba(255,168,0,.18);border:1px solid rgba(255,168,0,.32);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:0 0 46px;">⚡</div>
+          <div><div style="font-family:var(--font-d);font-size:.90rem;font-weight:700;color:var(--amber);margin-bottom:2px;">Quantum Yield — 4× Profit Milestone Achieved</div><div style="font-size:.78rem;color:var(--muted);">$75,000 principal → <strong style="color:var(--green);">$300,000</strong> lifetime profits · 4× return · Total value: <strong style="color:var(--cyan);">$375,000</strong></div></div>
+        </div>
+        <div class="text-right"><div style="font-family:var(--font-m);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px;">Portfolio Value</div><div style="font-family:var(--font-d);font-size:1.4rem;font-weight:800;color:var(--amber);">$375,000</div><span class="badge badge-amber mt-1"><i class="fa-solid fa-trophy" style="font-size:.44rem;"></i>Elite Tier</span></div>
+      </div>
       <div class="dash-tabs" id="dash-tabs">
         <div class="dash-tab active" data-panel="panel-overview"><i class="fa-solid fa-chart-line"></i>Overview</div>
         <div class="dash-tab" data-panel="panel-mining"><i class="fa-solid fa-microchip"></i>Mining</div>
         <div class="dash-tab" data-panel="panel-staking"><i class="fa-solid fa-layer-group"></i>Staking</div>
         <div class="dash-tab" data-panel="panel-trading"><i class="fa-solid fa-arrow-trend-up"></i>Trading</div>
-        <div class="dash-tab" data-panel="panel-profile"><i class="fa-solid fa-user-pen"></i>Profile</div>
         <div class="dash-tab" data-panel="panel-history"><i class="fa-solid fa-clock-rotate-left"></i>History</div>
       </div>
       <div class="dash-panel active" id="panel-overview">
@@ -1127,7 +1050,6 @@ textarea.form-control{min-height:124px;resize:vertical;}
               <button class="op-btn" data-tab="panel-mining"><div class="op-icon"><i class="fa-solid fa-microchip"></i></div><span>Mining Control</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" data-tab="panel-staking"><div class="op-icon"><i class="fa-solid fa-layer-group"></i></div><span>Stake Assets</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" data-tab="panel-trading"><div class="op-icon"><i class="fa-solid fa-arrow-trend-up"></i></div><span>Execute Trade</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" data-tab="panel-profile"><div class="op-icon"><i class="fa-solid fa-user-pen"></i></div><span>Edit Bio &amp; Photo</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" id="open-deposit-btn"><div class="op-icon"><i class="fa-solid fa-arrow-down-to-bracket"></i></div><span>Initiate Deposit</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
               <button class="op-btn" id="withdraw-btn"><div class="op-icon" style="background:rgba(255,51,85,.12);color:var(--red);"><i class="fa-solid fa-arrow-up-from-bracket"></i></div><span>Instant Withdrawal</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
             </div>
@@ -1238,64 +1160,6 @@ textarea.form-control{min-height:124px;resize:vertical;}
           <div style="overflow-x:auto;"><table class="tx-table"><thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Balance</th></tr></thead><tbody id="trading-tx-body"></tbody></table></div>
         </div>
       </div>
-      <div class="dash-panel" id="panel-profile">
-        <div class="profile-layout">
-          <div class="card card-glow" style="padding:24px;">
-            <div class="profile-avatar-shell">
-              <div class="profile-avatar-frame" id="profile-avatar-preview">Q</div>
-              <label class="avatar-edit-btn" for="profile-photo-input" title="Edit photo icon"><i class="fa-solid fa-camera"></i></label>
-              <input type="file" id="profile-photo-input" accept="image/*" class="hidden"/>
-              <div class="profile-name-large" id="profile-card-name">Client</div>
-              <div class="badge badge-cyan mt-2" id="profile-card-role"><i class="fa-solid fa-badge-check" style="font-size:.45rem;"></i>Client Profile</div>
-            </div>
-            <div class="profile-note mt-4"><i class="fa-solid fa-circle-info"></i><span>Use the camera icon on your photo to update your picture or icon. Click <strong>Dashboard</strong> in the top-right nav any time to return to the main dashboard view.</span></div>
-            <div class="profile-meta-list mt-4">
-              <div class="profile-meta-item"><span>Email</span><strong id="profile-email-view">—</strong></div>
-              <div class="profile-meta-item"><span>Bio Preview</span><div class="profile-bio-copy" id="profile-bio-preview">Add a short bio so your team knows who you are.</div></div>
-            </div>
-          </div>
-          <div class="card" style="padding:24px;">
-            <div class="flex-between mb-3">
-              <div>
-                <div style="font-family:var(--font-d);font-size:1.08rem;font-weight:700;color:var(--text);">Edit User Bio</div>
-                <div style="font-size:.82rem;color:var(--muted);">Update your dashboard profile details and picture.</div>
-              </div>
-              <span class="badge badge-blue"><i class="fa-solid fa-user-pen" style="font-size:.45rem;"></i>Profile Editor</span>
-            </div>
-            <div class="alert alert-success" id="profile-ok"><i class="fa-solid fa-circle-check"></i><span>Profile updated successfully.</span></div>
-            <form id="profile-form" novalidate>
-              <div class="profile-form-grid">
-                <div class="form-group">
-                  <label class="form-label">Display Name</label>
-                  <input type="text" class="form-control" id="profile-display-name" placeholder="Your display name"/>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Headline / Role</label>
-                  <input type="text" class="form-control" id="profile-role" placeholder="Portfolio Manager"/>
-                </div>
-              </div>
-              <div class="profile-form-grid">
-                <div class="form-group">
-                  <label class="form-label">Location</label>
-                  <input type="text" class="form-control" id="profile-location" placeholder="City, Country"/>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" id="profile-email" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Bio</label>
-                <textarea class="form-control" id="profile-bio" placeholder="Tell the team a little about yourself, your investing focus, or how you use the platform."></textarea>
-              </div>
-              <div class="flex gap-3 flex-wrap">
-                <button type="submit" class="btn btn-cyan"><i class="fa-solid fa-floppy-disk"></i>Save Profile</button>
-                <button type="button" class="btn btn-ghost" id="profile-reset-btn"><i class="fa-solid fa-rotate-left"></i>Reset</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
       <div class="dash-panel" id="panel-history">
         <div class="card" style="padding:0;overflow:hidden;">
           <div class="card-header"><span class="card-title"><i class="fa-solid fa-clock-rotate-left"></i>Full Transaction History</span><div class="flex gap-2"><span class="badge badge-green"><i class="fa-solid fa-circle" style="font-size:.40rem;"></i>Realtime</span></div></div>
@@ -1305,66 +1169,46 @@ textarea.form-control{min-height:124px;resize:vertical;}
       </div>
     </div>
   </div>
-  <footer style="padding:20px 0;border-top:1px solid var(--stroke2);background:rgba(2,3,7,.85);margin-top:40px;">
-    <div class="container"><p style="text-align:center;font-size:.70rem;color:var(--ghost);"><strong style="color:var(--cyan);">© 2025 Citadel Financials</strong> · Quantum Ledger v7.0</p></div>
-  </footer>
 </div>
 
-<!-- ══════════════════════════
-     ADMIN DASHBOARD PAGE
-══════════════════════════ -->
-<div id="page-admin-dashboard" class="page">
-  <div class="inner-page-wrap">
-    <div class="container inner-content">
-      <div class="flex-between flex-wrap mb-4" style="align-items:flex-end;gap:18px;">
-        <div>
-          <div class="sec-eye"><i class="fa-solid fa-user-shield fa-xs"></i>Operations Route</div>
-          <h1 class="sec-title" style="margin-bottom:8px;">Admin <span class="a">Dashboard</span></h1>
-          <p class="sec-sub">Operational route for review workflows, approvals, and fast navigation back to the client dashboard.</p>
-        </div>
-        <div class="admin-quick-nav">
-          <button class="btn btn-outline btn-lg" onclick="goToDashboard()"><i class="fa-solid fa-table-columns"></i>Return to Dashboard</button>
-          <button class="btn btn-cyan btn-lg" onclick="goToDashboard('panel-profile')"><i class="fa-solid fa-user-pen"></i>Open User Bio Editor</button>
-        </div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="https://www.ir-impact.com/wp-content/uploads/2024/11/Logo_Citadel-1024x499.png" alt="Citadel" class="footer-brand-img"/>
+        <p class="footer-about">Institutional-grade decentralized asset management. Powered by Quantum Ledger technology and proprietary algorithmic intelligence.</p>
       </div>
-      <div class="dashboard-return-pill"><i class="fa-solid fa-table-columns"></i><span>Logged in users can return to the main dashboard from any page by clicking <strong>Dashboard</strong> in the top-right navigation.</span></div>
-      <div class="admin-layout">
-        <div class="met-card"><div class="met-lbl">Active Session</div><div class="met-val" id="admin-active-session">1</div><div class="met-desc">Authenticated admin route session</div></div>
-        <div class="met-card"><div class="met-lbl">Transactions Loaded</div><div class="met-val" id="admin-transaction-count">0</div><div class="met-desc">Currently visible account ledger rows</div></div>
-        <div class="met-card"><div class="met-lbl">Pending Reviews</div><div class="met-val amber" id="admin-review-count">4</div><div class="met-desc">Bio edits, deposits, and withdrawals</div></div>
-        <div class="met-card"><div class="met-lbl">Route Status</div><div class="met-val green">Live</div><div class="met-desc">#/admin available while logged in</div></div>
-      </div>
-      <div class="admin-panel-grid">
-        <div class="card" style="padding:0;overflow:hidden;">
-          <div class="card-header"><span class="card-title"><i class="fa-solid fa-list-check"></i>Review Queue</span><span class="badge badge-amber" id="admin-queue-badge">4 Open</span></div>
-          <div class="card-body">
-            <div class="admin-action-list">
-              <button class="op-btn" onclick="goToDashboard('panel-profile')"><div class="op-icon"><i class="fa-solid fa-user-pen"></i></div><span>Open user bio and photo editor</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" onclick="goToDashboard('panel-history')"><div class="op-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><span>Review transaction history</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" onclick="goToDashboard('panel-trading')"><div class="op-icon"><i class="fa-solid fa-arrow-trend-up"></i></div><span>Inspect live trading activity</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-              <button class="op-btn" onclick="goToDashboard('panel-overview')"><div class="op-icon"><i class="fa-solid fa-chart-line"></i></div><span>Return to dashboard overview</span><i class="fa-solid fa-chevron-right op-arrow"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="card" style="padding:24px;">
-          <div style="font-family:var(--font-d);font-size:1.04rem;font-weight:700;color:var(--text);margin-bottom:16px;">Route Details</div>
-          <div class="admin-action-list">
-            <div class="admin-mini-stat"><div class="lbl">Current Operator</div><div class="val" id="admin-operator-name">Client</div></div>
-            <div class="admin-mini-stat"><div class="lbl">Route Hash</div><div class="val">#/admin</div></div>
-            <div class="admin-mini-stat"><div class="lbl">Return Path</div><div class="val">Top-right Dashboard button</div></div>
-            <div class="admin-mini-stat"><div class="lbl">Profile Editor</div><div class="val">Dashboard → Profile</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="card mt-4" style="padding:0;overflow:hidden;">
-        <div class="card-header"><span class="card-title"><i class="fa-solid fa-wave-square"></i>Latest Session Activity</span><span class="badge badge-green">Live UI Route</span></div>
-        <div class="card-body">
-          <div class="admin-log-list" id="admin-activity-log"></div>
-        </div>
+      <div class="footer-col"><h5>Platform</h5><ul>
+        <li><a href="#/" onclick="scrollTo('sec-features'); return false;">Technology</a></li>
+        <li><a href="#/" onclick="scrollTo('sec-performance'); return false;">Performance</a></li>
+        <li><a href="#/" onclick="scrollTo('sec-markets'); return false;">Markets</a></li>
+        <li><a href="#/" onclick="scrollTo('sec-advantage'); return false;">Why Citadel</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Account</h5><ul>
+        <li><a href="#/login" id="f-login">Client Login</a></li>
+        <li><a href="#/register" id="f-register">Open Account</a></li>
+        <li><a href="#/verify" id="f-verify">Verify Account</a></li>
+        <li><a href="#/dashboard" id="f-dashboard">Dashboard</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Legal</h5><ul>
+        <li><a href="#/terms" onclick="navToPage('page-terms')">Terms of Service</a></li>
+        <li><a href="#/privacy" onclick="navToPage('page-privacy')">Privacy Policy</a></li>
+        <li><a href="#/risk" onclick="navToPage('page-risk')">Risk Disclosure</a></li>
+        <li><a href="#/aml" onclick="navToPage('page-aml')">AML Policy</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy"><strong>© 2025 Citadel Financials</strong> · Quantum Ledger v7.0</p>
+      <div class="footer-legal">
+        <a href="#/terms" onclick="navToPage('page-terms')">Terms of Service</a>
+        <a href="#/privacy" onclick="navToPage('page-privacy')">Privacy Policy</a>
+        <a href="#/risk" onclick="navToPage('page-risk')">Risk Disclosure</a>
+        <a href="#/aml" onclick="navToPage('page-aml')">AML Policy</a>
       </div>
     </div>
+    <p class="footer-disclaimer">Investments involve significant risk. Past performance is not indicative of future results. For qualified investors only. Not available in all jurisdictions.</p>
   </div>
-</div>
+</footer>
 
 <!-- ══ WITHDRAWAL MODAL ══ -->
 <div class="modal-back" id="withdrawal-modal">
@@ -1449,7 +1293,6 @@ let perfPageChartInstance = null;
 let heroChartInstance = null;
 let realtimeChannel = null;
 let currentSession = null;
-let currentUserProfile = null;
 let pendingEmail = null;
 let tradeType = 'buy';
 let selectedAsset = 'BTC';
@@ -1457,7 +1300,6 @@ let miningActive = [true, true, false];
 let stakingData = {};
 let orderBookInterval = null;
 let miningInterval = null;
-let stakingRewardsInterval = null;
 let miningEarnings = [0, 0, 0];
 
 const $ = id => document.getElementById(id);
@@ -1465,18 +1307,47 @@ const fmt = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',
 const parseAmt = s => parseFloat((s||'').replace(/[$,+]/g,'')) || 0;
 const getBalance = () => transactions.length ? parseAmt(transactions[transactions.length-1].balance) : 0;
 const delay = ms => new Promise(r=>setTimeout(r,ms));
+const isLegacy = () => false;
 
-async function buildSessionUser(user) {
-  if (!user) return null;
-  let name = user.email || 'Client';
-  try {
-    const { data:profile } = await _sb.from('profiles').select('first_name,last_name').eq('id',user.id).single();
-    if (profile?.first_name || profile?.last_name) {
-      name = [profile.first_name, profile.last_name].filter(Boolean).join(' ').trim() || name;
-    }
-  } catch {}
-  return { id:user.id, name, email:user.email };
-}
+const SEED_TXS = [
+  {date:"2024-07-01",type:"Initial Deposit",amount:"$14,200.00",balance:"$14,200.00"},
+  {date:"2024-07-08",type:"Initial Deposit",amount:"$9,500.00",balance:"$23,700.00"},
+  {date:"2024-08-10",type:"Initial Deposit",amount:"$10,123.00",balance:"$33,823.00"},
+  {date:"2024-09-03",type:"Initial Deposit",amount:"$1,974.00",balance:"$35,797.00"},
+  {date:"2024-10-01",type:"Initial Deposit",amount:"$18,143.35",balance:"$53,940.35"},
+  {date:"2024-11-01",type:"Initial Deposit",amount:"$21,059.65",balance:"$75,000.00"},
+  {date:"2024-11-04",type:"Mining Profit",amount:"+$282.51",balance:"$75,422.08"},
+  {date:"2024-11-12",type:"Trading Gain",amount:"+$327.67",balance:"$75,749.75"},
+  {date:"2024-11-13",type:"Mining Profit",amount:"+$394.21",balance:"$76,143.96"},
+  {date:"2024-11-17",type:"Trading Gain",amount:"+$349.01",balance:"$76,782.62"},
+  {date:"2024-11-19",type:"Staking Reward",amount:"+$262.21",balance:"$77,131.63"},
+  {date:"2025-01-02",type:"Mining Profit",amount:"+$177.45",balance:"$77,815.10"},
+  {date:"2025-01-14",type:"Mining Profit",amount:"+$388.17",balance:"$79,535.25"},
+  {date:"2025-02-01",type:"Staking Reward",amount:"+$372.89",balance:"$80,195.11"},
+  {date:"2025-02-17",type:"Trading Gain",amount:"+$280.43",balance:"$82,460.35"},
+  {date:"2025-03-18",type:"Trading Gain",amount:"+$396.72",balance:"$85,842.27"},
+  {date:"2025-04-05",type:"Mining Profit",amount:"+$261.54",balance:"$89,711.17"},
+  {date:"2025-04-29",type:"Trading Gain",amount:"+$398.64",balance:"$91,888.94"},
+  {date:"2025-05-12",type:"Trading Gain",amount:"+$347.50",balance:"$94,015.69"},
+  {date:"2025-06-08",type:"Mining Profit",amount:"+$303.75",balance:"$97,493.14"},
+  {date:"2025-06-21",type:"Trading Gain",amount:"+$381.42",balance:"$98,702.65"},
+  {date:"2025-07-08",type:"Mining Profit",amount:"+$376.50",balance:"$101,414.35"},
+  {date:"2025-08-04",type:"Staking Reward",amount:"+$360.55",balance:"$104,009.71"},
+  {date:"2025-08-22",type:"Trading Gain",amount:"+$384.76",balance:"$105,864.05"},
+  {date:"2025-09-08",type:"Staking Reward",amount:"+$4,705.74",balance:"$113,383.61"},
+  {date:"2025-09-10",type:"Trading Gain",amount:"+$4,939.05",balance:"$118,322.66"},
+  {date:"2025-09-12",type:"Mining Profit",amount:"+$4,911.33",balance:"$123,233.99"},
+  {date:"2025-09-16",type:"Mining Profit",amount:"+$4,923.76",balance:"$137,634.04"},
+  {date:"2025-09-24",type:"Mining Profit",amount:"+$4,954.11",balance:"$147,428.43"},
+  {date:"2025-09-27",type:"Staking Reward",amount:"+$4,998.50",balance:"$157,409.15"},
+  {date:"2025-09-28",type:"Mining Profit",amount:"+$4,838.00",balance:"$162,247.15"},
+  {date:"2025-10-02",type:"Trading Gain",amount:"+$1,598.53",balance:"$163,845.68"},
+  {date:"2025-10-14",type:"Trading Loss",amount:"-$329.96",balance:"$163,907.66"},
+  {date:"2025-11-06",type:"Trading Loss",amount:"-$318.01",balance:"$163,973.47"},
+  {date:"2025-11-25",type:"Quantum Yield — 4\u00d7 Profit Milestone",amount:"+$191,600.96",balance:"$355,220.45"},
+  {date:"2025-12-01",type:"Alpha Portfolio Bonus",amount:"+$48,360.89",balance:"$403,581.34"},
+  {date:"2025-12-05",type:"Hedge Fund Fee",amount:"-$28,581.34",balance:"$375,000.00"}
+];
 
 /* ── AUTH ── */
 const Auth = {
@@ -1485,9 +1356,7 @@ const Auth = {
       options: { data:{ first_name:firstName, last_name:lastName, full_name:`${firstName} ${lastName}` }, emailRedirectTo: window.location.origin + window.location.pathname }
     });
     if (error) return { ok:false, msg:error.message };
-    if (data.user) {
-      await _sb.from('profiles').upsert({ id:data.user.id, first_name:firstName, last_name:lastName, phone:phone||'', country, investor_type:type });
-    }
+    if (data.user) { await _sb.from('profiles').upsert({ id:data.user.id, first_name:firstName, last_name:lastName, phone:phone||'', country, investor_type:type }); }
     return { ok:true, needsConfirm:!data.session };
   },
   async login(email, password) {
@@ -1497,65 +1366,49 @@ const Auth = {
       if (msg.includes('email not confirmed') || msg.includes('not confirmed')) return { ok:false, msg:'Please confirm your email first.', needsVerify:true };
       return { ok:false, msg:error.message };
     }
-    const user = await buildSessionUser(data.user);
-    this._cache(user);
-    return { ok:true, user };
+    const { data:profile } = await _sb.from('profiles').select('first_name,last_name').eq('id',data.user.id).single();
+    const name = profile ? `${profile.first_name} ${profile.last_name}` : data.user.email;
+    const user = { id:data.user.id, name, email:data.user.email, isLegacy:false };
+    this._cache(user); return { ok:true, user };
   },
   async verifyOTP(email, token) {
     if (!email) return { ok:false, msg:'No email found. Please try registering again.' };
     const { data, error } = await _sb.auth.verifyOtp({ email, token, type:'email' });
     if (error) return { ok:false, msg:error.message };
-    const user = await buildSessionUser(data.user);
-    this._cache(user);
-    return { ok:true, user };
+    const uid = data.user?.id; let name = data.user?.email;
+    if (uid) { const { data:p } = await _sb.from('profiles').select('first_name,last_name').eq('id',uid).single(); if (p) name = `${p.first_name} ${p.last_name}`; }
+    const user = { id:uid, name, email:data.user?.email, isLegacy:false };
+    this._cache(user); return { ok:true, user };
   },
   async sendPasswordReset(email) {
     const { error } = await _sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + window.location.pathname });
     return error ? { ok:false, msg:error.message } : { ok:true };
   },
-  async resendOTP(email) {
-    const { error } = await _sb.auth.resend({ type:'signup', email });
-    return error ? { ok:false, msg:error.message } : { ok:true };
-  },
+  async resendOTP(email) { const { error } = await _sb.auth.resend({ type:'signup', email }); return error ? { ok:false, msg:error.message } : { ok:true }; },
   async getSession() {
-    const cached = this._getCached();
-    if (cached) return cached;
-    const { data } = await _sb.auth.getSession();
-    if (!data?.session) return null;
-    const user = await buildSessionUser(data.session.user);
-    this._cache(user);
-    return user;
+    const cached = this._getCached(); if (cached) return cached;
+    const { data } = await _sb.auth.getSession(); if (!data?.session) return null;
+    const u = data.session.user;
+    const { data:p } = await _sb.from('profiles').select('first_name,last_name').eq('id',u.id).single();
+    const name = p ? `${p.first_name} ${p.last_name}` : u.email;
+    const user = { id:u.id, name, email:u.email, isLegacy:false };
+    this._cache(user); return user;
   },
-  async logout() {
-    localStorage.removeItem('ql_session');
-    currentSession = null;
-    currentUserProfile = null;
-    await _sb.auth.signOut().catch(()=>{});
-  },
-  _cache(user) {
-    currentSession = user;
-    const payload = { ...user, exp:Date.now()+4*60*60*1000 };
-    localStorage.setItem('ql_session', JSON.stringify(payload));
-  },
+  async logout() { localStorage.removeItem('ql_session'); currentSession = null; await _sb.auth.signOut().catch(()=>{}); },
+  _cache(user) { currentSession = user; const p = { ...user, exp:Date.now()+4*60*60*1000 }; localStorage.setItem('ql_session', JSON.stringify(p)); },
   _getCached() {
-    try {
-      const raw = localStorage.getItem('ql_session');
-      if (!raw) return null;
-      const payload = JSON.parse(raw);
-      if (Date.now() < payload.exp) { currentSession = payload; return payload; }
-      localStorage.removeItem('ql_session');
-    } catch {}
+    for (const k of ['ql_session']) { try { const raw = localStorage.getItem(k); if (!raw) continue; const p = JSON.parse(raw); if (Date.now() < p.exp) { currentSession = p; return p; } localStorage.removeItem(k); } catch {} }
     return null;
   }
 };
 
 const TxStore = {
-  async load(userId) {
+  async load(userId, legacy) {
     const { data, error } = await _sb.from('transactions').select('*').eq('user_id', userId).order('date',{ascending:true}).order('created_at',{ascending:true});
     if (error) { console.error('[QL]',error); transactions=[]; return; }
     transactions = (data||[]).map(r=>({date:r.date,type:r.type,amount:r.amount,balance:r.balance}));
   },
-  async add(userId, txData) {
+  async add(userId, legacy, txData) {
     transactions.push(txData);
     const { error } = await _sb.from('transactions').insert({ user_id:userId, date:txData.date, type:txData.type, amount:txData.amount, balance:txData.balance });
     if (error) { console.error('[QL] TX insert:',error); return { ok:false }; }
@@ -1588,167 +1441,72 @@ function toast(type, title, msg, dur=5200) {
   setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(10px)';el.style.transition='.28s';setTimeout(()=>el.remove(),300);},dur);
 }
 
-function getProfileStorageKey(userId) { return `ql_profile_${userId}`; }
-function getDefaultProfile(session=currentSession) {
-  const resolvedName = session?.name || 'Client';
-  return { displayName:resolvedName, role:'Client Profile', location:'', bio:'', avatar:'' };
-}
-function getInitials(name='Client') {
-  const initials = name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]?.toUpperCase()||'').join('');
-  return initials || 'C';
-}
-function setAvatarContent(el, profile=currentUserProfile, fallbackName=currentSession?.name) {
-  if (!el) return;
-  const avatar = profile?.avatar || '';
-  if (avatar) el.innerHTML = `<img src="${avatar}" alt="Profile photo"/>`;
-  else el.textContent = getInitials(profile?.displayName || fallbackName || 'Client');
-}
-async function loadUserProfile(session=currentSession) {
-  if (!session?.id) return;
-  const base = getDefaultProfile(session);
-  try {
-    const raw = localStorage.getItem(getProfileStorageKey(session.id));
-    currentUserProfile = raw ? { ...base, ...JSON.parse(raw) } : base;
-  } catch {
-    currentUserProfile = base;
-  }
-  renderUserProfile();
-}
-function renderUserProfile() {
-  if (!currentSession) return;
-  const profile = currentUserProfile || getDefaultProfile(currentSession);
-  const resolvedName = profile.displayName || currentSession.name || 'Client';
-  const shortName = resolvedName.split(' ')[0] || 'Client';
-  if ($('nav-username')) $('nav-username').textContent = shortName;
-  if ($('dash-name')) $('dash-name').textContent = shortName;
-  if ($('profile-card-name')) $('profile-card-name').textContent = resolvedName;
-  if ($('profile-card-role')) $('profile-card-role').innerHTML = `<i class="fa-solid fa-badge-check" style="font-size:.45rem;"></i>${profile.role || 'Client Profile'}`;
-  if ($('profile-email-view')) $('profile-email-view').textContent = currentSession.email || '—';
-  if ($('profile-display-name')) $('profile-display-name').value = resolvedName;
-  if ($('profile-role')) $('profile-role').value = profile.role || '';
-  if ($('profile-location')) $('profile-location').value = profile.location || '';
-  if ($('profile-email')) $('profile-email').value = currentSession.email || '';
-  if ($('profile-bio')) $('profile-bio').value = profile.bio || '';
-  if ($('profile-bio-preview')) $('profile-bio-preview').textContent = profile.bio || 'Add a short bio so your team knows who you are.';
-  setAvatarContent($('nav-avatar'), profile, resolvedName);
-  setAvatarContent($('profile-avatar-preview'), profile, resolvedName);
-}
-async function saveUserProfile(profile) {
-  if (!currentSession?.id) return;
-  currentUserProfile = { ...getDefaultProfile(currentSession), ...profile };
-  localStorage.setItem(getProfileStorageKey(currentSession.id), JSON.stringify(currentUserProfile));
-  const resolvedName = currentUserProfile.displayName || currentSession.name || 'Client';
-  if (resolvedName !== currentSession.name) {
-    currentSession = { ...currentSession, name:resolvedName };
-    Auth._cache(currentSession);
-    const [firstName='', ...rest] = resolvedName.trim().split(/\s+/);
-    try {
-      await _sb.from('profiles').upsert({ id:currentSession.id, first_name:firstName || resolvedName, last_name:rest.join(' ') });
-    } catch {}
-  }
-  renderUserProfile();
-}
-function resetUserProfileForm() {
-  if (!currentSession?.id) return;
-  currentUserProfile = getDefaultProfile(currentSession);
-  localStorage.removeItem(getProfileStorageKey(currentSession.id));
-  renderUserProfile();
-  $('profile-ok')?.classList.remove('show');
-  toast('info','Profile Reset','Your dashboard bio and avatar were reset.');
-}
-function goToDashboard(panelId='panel-overview') {
-  showPage('page-dashboard');
-  initDashboard(currentSession).then(()=>switchTab(panelId));
-}
-function goToAdminDashboard() {
-  if (!currentSession) { showPage('page-login'); return; }
-  showPage('page-admin-dashboard');
-  initAdminDashboard();
-}
-function openProfilePanel() {
-  goToDashboard('panel-profile');
-}
-function initAdminDashboard() {
-  if (!currentSession) return;
-  if ($('admin-operator-name')) $('admin-operator-name').textContent = currentSession.name;
-  if ($('admin-transaction-count')) $('admin-transaction-count').textContent = transactions.length;
-  const reviewCount = transactions.length ? Math.min(9, Math.max(3, Math.ceil(transactions.length / 4))) : 3;
-  if ($('admin-review-count')) $('admin-review-count').textContent = reviewCount;
-  if ($('admin-queue-badge')) $('admin-queue-badge').textContent = `${reviewCount} Open`;
-  const latestTx = [...transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,3);
-  const defaultLogs = [
-    { title:'Admin route enabled', msg:'The #/admin route is now available while a user is logged in.' },
-    { title:'Dashboard return path', msg:'Users can click the top-right Dashboard button to jump back to the main dashboard UI.' },
-    { title:'Profile editor linked', msg:'User bio editing and photo/icon updates are available in Dashboard → Profile.' }
-  ];
-  const txLogs = latestTx.map(tx => ({ title:tx.type, msg:`${tx.amount} · Balance ${tx.balance} · ${tx.date}` }));
-  const logs = [...defaultLogs, ...txLogs].slice(0,6);
-  if ($('admin-activity-log')) {
-    $('admin-activity-log').innerHTML = logs.map(log => `<div class="admin-log-item"><strong>${log.title}</strong><span>${log.msg}</span></div>`).join('');
-  }
-}
-
 /* ── ROUTER ── */
 function showPage(id) {
+  const target = $(id);
+  if (!target) return;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  $(id).classList.add('active');
+  target.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
   updateNav();
   const hmap={
-    'page-landing':'','page-login':'/login','page-register':'/register','page-verify':'/verify',
-    'page-forgot':'/forgot','page-dashboard':'/dashboard','page-admin-dashboard':'/admin','page-performance':'/performance',
+    'page-landing':'/','page-login':'/login','page-register':'/register','page-verify':'/verify',
+    'page-forgot':'/forgot','page-dashboard':'/dashboard','page-performance':'/performance',
     'page-markets':'/markets','page-faq':'/faq','page-technology':'/technology',
     'page-terms':'/terms','page-privacy':'/privacy','page-risk':'/risk','page-aml':'/aml'
   };
   if (hmap[id]!==undefined) history.replaceState(null,'','#'+hmap[id]);
+  // Init page-specific content
   if (id==='page-performance') initPerfPage();
   if (id==='page-markets') initMarketsPage();
   if (id==='page-faq') initFAQPage();
-  if (id==='page-admin-dashboard') initAdminDashboard();
 }
 
+// Helper for footer/nav links to inner pages
 function navToPage(pageId) { showPage(pageId); }
 
 function updateNav() {
-  const s = currentSession || Auth._getCached();
+  const s = Auth._getCached();
   ['nav-login-btn','nav-reg-btn'].forEach(id=>$(id)?.classList.toggle('hidden',!!s));
-  ['nav-dashboard-btn','nav-admin-btn','nav-user','nav-logout-btn'].forEach(id=>$(id)?.classList.toggle('hidden',!s));
-  if (s) {
-    if (currentUserProfile) renderUserProfile();
-    else {
-      if ($('nav-username')) $('nav-username').textContent = (s.name || 'Client').split(' ')[0];
-      if ($('nav-avatar')) $('nav-avatar').textContent = getInitials(s.name || 'Client');
-    }
-  }
-  if ($('page-landing').classList.contains('active')) {
+  $('nav-user').classList.toggle('hidden',!s);
+  if(s){$('nav-username').textContent=s.name.split(' ')[0];$('nav-avatar').textContent=s.name[0].toUpperCase();}
+  if (!$('page-landing').classList.contains('active')) {
     document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-    $('nl-home')?.classList.add('active');
   }
 }
 
 async function route() {
   const s = await Auth.getSession();
-  const h = location.hash;
-  const routeMap = {
+  const h = location.hash || '#/';
+  const publicRouteMap = {
+    '#':'page-landing','#/':'page-landing',
     '#/login':'page-login','#/register':'page-register','#/verify':'page-verify','#/forgot':'page-forgot',
-    '#/dashboard':'page-dashboard','#/admin':'page-admin-dashboard','#/performance':'page-performance',
-    '#/markets':'page-markets','#/faq':'page-faq','#/technology':'page-technology',
+    '#/performance':'page-performance','#/markets':'page-markets','#/faq':'page-faq','#/technology':'page-technology',
     '#/terms':'page-terms','#/privacy':'page-privacy','#/risk':'page-risk','#/aml':'page-aml'
   };
-  if (s) {
-    currentSession = s;
-    await loadUserProfile(s);
-    const pageId = routeMap[h] || 'page-dashboard';
-    showPage(pageId);
-    if (pageId === 'page-dashboard') await initDashboard(s);
-    if (pageId === 'page-admin-dashboard') {
-      await TxStore.load(s.id);
-      initAdminDashboard();
+
+  if (publicRouteMap[h]) {
+    showPage(publicRouteMap[h]);
+    if (publicRouteMap[h] === 'page-landing') initLanding();
+    return;
+  }
+
+  if (h === '#/dashboard') {
+    if (s) {
+      showPage('page-dashboard');
+      await initDashboard(s);
+    } else {
+      showPage('page-login');
     }
     return;
   }
-  if (routeMap[h] && !['page-dashboard','page-admin-dashboard'].includes(routeMap[h])) { showPage(routeMap[h]); return; }
-  if (h==='#/dashboard' || h==='#/admin') { showPage('page-login'); return; }
+
+  if (s) {
+    showPage('page-dashboard');
+    await initDashboard(s);
+    return;
+  }
+
   showPage('page-landing');
   initLanding();
 }
@@ -2029,29 +1787,29 @@ async function initDashboard(session) {
   currentSession=session;
   $('dash-name').textContent=session.name.split(' ')[0];
   $('m-balance').textContent='—'; $('m-txcount').textContent='…';
-  await loadUserProfile(session);
-  await TxStore.load(session.id);
+  await TxStore.load(session.id, isLegacy());
   TxStore.subscribe(session.id, newTx=>{
-    renderMetrics(); renderAllTxTables(); buildDashChart(); initAdminDashboard();
+    renderMetrics(); renderAllTxTables(); buildDashChart();
     toast('info','New Transaction',`${newTx.type}: ${newTx.amount}`);
   });
   renderMetrics(); renderAllTxTables(); buildDashChart();
-  initMining(); initStaking(); initTrading(); updateTradeUI(); initAdminDashboard();
+  initMining(); initStaking(); initTrading(); updateTradeUI();
+  // Supabase status
   const sbb=$('sb-status-badge');
   if(sbb) sbb.innerHTML='<span class="badge badge-green" style="font-size:.48rem;"><i class="fa-solid fa-database" style="font-size:.40rem;"></i>Supabase Live</span>';
   $('dash-badge-row').innerHTML='<span class="badge badge-blue"><i class="fa-solid fa-shield-check" style="font-size:.45rem;"></i>Verified</span><span class="badge badge-green" style="margin-left:5px;"><i class="fa-solid fa-database" style="font-size:.40rem;"></i>Cloud Sync</span>';
+  if(isLegacy()) $('milestone-banner').style.display='flex';
 }
 
 function renderMetrics() {
   const bal=getBalance();
-  const profits = TxStore.calcProfits(transactions);
+  const profits = isLegacy() ? 300000 : TxStore.calcProfits(transactions);
   $('dash-bal-hero').textContent=bal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   $('m-balance').textContent=fmt(bal);
   $('m-profits').textContent=fmt(profits);
-  $('m-profits-desc').textContent='Net realized gains';
+  $('m-profits-desc').textContent=isLegacy()?'Net realized gains (4× on $75K)':'Net realized gains';
   $('m-txcount').textContent=transactions.length;
 }
-
 
 /* ═══════════════════════════════════════════════════
    TX TABLES
@@ -2198,12 +1956,16 @@ const STAKING_POOLS = [
 ];
 
 function initStaking() {
+  // Default staked amounts
   if(!Object.keys(stakingData).length) {
-    stakingData={eth2:{staked:0,earned:0},sol:{staked:0,earned:0},bnb:{staked:0,earned:0},defi:{staked:0,earned:0}};
+    if(isLegacy()) {
+      stakingData={eth2:{staked:12000,earned:504.1},sol:{staked:8000,earned:544},bnb:{staked:5000,earned:420},defi:{staked:0,earned:0}};
+    } else {
+      stakingData={eth2:{staked:0,earned:0},sol:{staked:0,earned:0},bnb:{staked:0,earned:0},defi:{staked:0,earned:0}};
+    }
   }
-  if (stakingRewardsInterval) clearInterval(stakingRewardsInterval);
   renderStakingPools();
-  stakingRewardsInterval=setInterval(()=>{
+  setInterval(()=>{
     STAKING_POOLS.forEach(p=>{if(stakingData[p.id]?.staked>0) stakingData[p.id].earned+=stakingData[p.id].staked*(p.apy/100/365/24/12);});
     renderStakingPools();
   }, 5000);
@@ -2249,7 +2011,7 @@ async function stakePool(poolId) {
   // Record transaction
   const newBal=bal-amt;
   const txData={date:new Date().toISOString().slice(0,10),type:`Staking Deposit (${pool.name})`,amount:'-'+fmt(amt),balance:fmt(newBal)};
-  await TxStore.add(currentSession?.id,txData);
+  await TxStore.add(currentSession?.id,isLegacy(),txData);
   stakingData[poolId].staked+=amt;
   renderMetrics(); renderAllTxTables(); buildDashChart(); renderStakingPools();
   toast('success','Staked!',`${fmt(amt)} staked in ${pool.name} at ${pool.apy}% APY.`);
@@ -2263,7 +2025,7 @@ async function unstakePool(poolId) {
   const total=sd.staked+sd.earned;
   const newBal=getBalance()+total;
   const txData={date:new Date().toISOString().slice(0,10),type:`Staking Reward (${pool.name})`,amount:'+'+fmt(sd.earned),balance:fmt(newBal)};
-  await TxStore.add(currentSession?.id,txData);
+  await TxStore.add(currentSession?.id,isLegacy(),txData);
   stakingData[poolId]={staked:0,earned:0};
   renderMetrics(); renderAllTxTables(); buildDashChart(); renderStakingPools();
   toast('success','Unstaked!',`${fmt(total)} returned to your balance (${fmt(sd.earned)} earned).`);
@@ -2401,7 +2163,7 @@ async function executeTrade() {
   }
   const newBal=bal+change-fee;
   const txData={date:new Date().toISOString().slice(0,10),type:txType,amount:(change>=0?'+':'')+fmt(change),balance:fmt(Math.max(0,newBal))};
-  await TxStore.add(currentSession?.id,txData);
+  await TxStore.add(currentSession?.id,isLegacy(),txData);
   renderMetrics(); renderAllTxTables(); buildDashChart();
   btn.innerHTML=orig; btn.disabled=false;
   $('trade-amount').value='';
@@ -2444,12 +2206,12 @@ $('confirm-dep').addEventListener('click', async()=>{
   await delay(1300);
   const newBal=getBalance()+amt;
   const txData={date:new Date().toISOString().slice(0,10),type:`Deposit (${cur}${net?' '+net:''})`,amount:'+'+fmt(amt),balance:fmt(newBal)};
-  await TxStore.add(currentSession?.id,txData);
+  await TxStore.add(currentSession?.id,isLegacy(),txData);
   renderMetrics(); renderAllTxTables(); buildDashChart();
   btn.innerHTML='Confirm Deposit'; btn.disabled=false;
   $('deposit-modal').classList.remove('open');
   $('deposit-form').reset(); $('usdt-networks').style.display='none';
-  toast('success','Deposit Confirmed',`${fmt(amt)} via ${cur}${net?' ('+net+')':''} credited.`);
+  toast('success','Deposit Confirmed',`${fmt(amt)} via ${cur}${net?' ('+net+')':''} credited.`+(isLegacy()?'':' Saved to Supabase.'));
 });
 
 /* ═══════════════════════════════════════════════════
@@ -2508,9 +2270,6 @@ const navObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.is
 ═══════════════════════════════════════════════════ */
 $('nav-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
 $('nav-reg-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
-$('nav-dashboard-btn').addEventListener('click',e=>{e.preventDefault();goToDashboard();});
-$('nav-admin-btn').addEventListener('click',e=>{e.preventDefault();goToAdminDashboard();});
-$('nav-user').addEventListener('click',e=>{e.preventDefault();openProfilePanel();});
 $('nav-brand').addEventListener('click',e=>{e.preventDefault();showPage('page-landing');initLanding();});
 $('hero-start-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-register');});
 $('hero-login-btn').addEventListener('click',e=>{e.preventDefault();showPage('page-login');});
@@ -2530,44 +2289,14 @@ $('f-login')?.addEventListener('click',()=>showPage('page-login'));
 $('f-register')?.addEventListener('click',()=>showPage('page-register'));
 $('f-verify')?.addEventListener('click',()=>showPage('page-verify'));
 $('f-dashboard')?.addEventListener('click',async()=>{const s=await Auth.getSession();if(s){showPage('page-dashboard');await initDashboard(s);}else showPage('page-login');});
-$('f-admin')?.addEventListener('click',async()=>{const s=await Auth.getSession();if(s){showPage('page-admin-dashboard');await TxStore.load(s.id);initAdminDashboard();}else showPage('page-login');});
-
-$('profile-form')?.addEventListener('submit', async e=>{
-  e.preventDefault();
-  const profile = {
-    displayName: $('profile-display-name').value.trim() || currentSession?.name || 'Client',
-    role: $('profile-role').value.trim() || 'Client Profile',
-    location: $('profile-location').value.trim(),
-    bio: $('profile-bio').value.trim(),
-    avatar: currentUserProfile?.avatar || ''
-  };
-  await saveUserProfile(profile);
-  $('profile-ok')?.classList.add('show');
-  toast('success','Profile Saved','Your bio and dashboard profile were updated.');
-});
-$('profile-reset-btn')?.addEventListener('click', ()=>resetUserProfileForm());
-$('profile-photo-input')?.addEventListener('change', e=>{
-  const file = e.target.files?.[0];
-  if (!file) return;
-  if (file.size > 4 * 1024 * 1024) { toast('error','Image Too Large','Please choose an image under 4 MB.'); e.target.value=''; return; }
-  const reader = new FileReader();
-  reader.onload = async () => {
-    await saveUserProfile({ ...(currentUserProfile || getDefaultProfile(currentSession)), avatar:String(reader.result || '') });
-    $('profile-ok')?.classList.add('show');
-    toast('success','Photo Updated','Your profile photo/icon was updated.');
-    e.target.value='';
-  };
-  reader.readAsDataURL(file);
-});
 
 // Logout
 $('nav-logout-btn').addEventListener('click', async()=>{
   if(realtimeChannel&&_sb)_sb.removeChannel(realtimeChannel);
   if(miningInterval)clearInterval(miningInterval);
   if(orderBookInterval)clearInterval(orderBookInterval);
-  if(stakingRewardsInterval)clearInterval(stakingRewardsInterval);
   await Auth.logout();
-  transactions=[]; currentSession=null; currentUserProfile=null; stakingData={};
+  transactions=[]; currentSession=null; stakingData={};
   showPage('page-landing'); initLanding();
   toast('info','Signed Out','You have been securely signed out.');
 });
