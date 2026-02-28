@@ -3503,6 +3503,14 @@ function renderMetrics() {
   $('m-profits').textContent=fmt(profits);
   $('m-profits-desc').textContent=isLegacy()?'Net realized gains (4× on $75K)':'Net realized gains';
   $('m-txcount').textContent=transactions.length;
+  const socket = new WebSocket(
+  "wss://cql-market-hub.brownstonetberesearch.workers.dev/ws"
+);
+
+socket.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  console.log("Market Update:", data);
+};
 }
 
 /* ═══════════════════════════════════════════════════
