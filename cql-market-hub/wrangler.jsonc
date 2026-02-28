@@ -1,0 +1,28 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "cql-market-hub",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-02-28",
+
+  "vars": {
+    "APP_ORIGIN": "https://citadelquantumledger.pages.dev",
+    "WORKER_NAME": "cql-market-hub",
+    "SNAPSHOT_TTL_MS": "15000",
+    "COINAPI_REST_POLL_MS": "30000",
+    "OANDA_POLL_MS": "15000",
+    "TWELVE_POLL_MS": "30000"
+  },
+
+  "durable_objects": {
+    "bindings": [
+      { "name": "MARKET_HUB", "class_name": "MarketHub" }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["MarketHub"]
+    }
+  ]
+}

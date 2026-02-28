@@ -1,0 +1,15 @@
+{
+  "name": "cql-market-hub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail",
+    "secrets": "bash ./scripts/set-secrets.sh",
+    "smoke": "bash ./scripts/smoke-test.sh"
+  },
+  "devDependencies": {
+    "wrangler": "^4.69.0"
+  }
+}
